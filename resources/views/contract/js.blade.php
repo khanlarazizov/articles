@@ -114,16 +114,16 @@
                 error: function (err) {
                     if (err) {
                         console.log('123')
-                        $('#edit_nameError').html(err.responseJSON.errors.name);
-                        $('#edit_dateError').html(err.responseJSON.errors.date);
-                        $('#edit_typeErrorError').html(err.responseJSON.errors.type);
-                        $('#edit_shoppingError').html(err.responseJSON.errors.shopping);
-                        $('#edit_otherSideTypeError').html(err.responseJSON.errors.other_side_type);
-                        $('#edit_otherSideNameError').html(err.responseJSON.errors.other_side_name);
-                        $('#edit_tagError').html(err.responseJSON.errors.tag);
-                        $('#edit_priceError').html(err.responseJSON.errors.price);
-                        $('#edit_currencyError').html(err.responseJSON.errors.currency);
-                        $('#edit_fileError').html(err.responseJSON.errors.file);
+                        $('#nameError').html(err.responseJSON.errors.name);
+                        $('#dateError').html(err.responseJSON.errors.date);
+                        $('#typeErrorError').html(err.responseJSON.errors.type);
+                        $('#shoppingError').html(err.responseJSON.errors.shopping);
+                        $('#otherSideTypeError').html(err.responseJSON.errors.other_side_type);
+                        $('#otherSideNameError').html(err.responseJSON.errors.other_side_name);
+                        $('#tagError').html(err.responseJSON.errors.tag);
+                        $('#priceError').html(err.responseJSON.errors.price);
+                        $('#currencyError').html(err.responseJSON.errors.currency);
+                        $('#fileError').html(err.responseJSON.errors.file);
                     }
                 }
             });
