@@ -14,16 +14,20 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('date')->nullable();
+            $table->string('slug');
+            $table->date('date');
+            $table->unsignedBigInteger('folder_id');
             $table->enum('type', ['Partnyorluq', 'Xidmət','Alqı-satqı']);
             $table->enum('shopping', ['Biz alırıq', 'Biz satırıq']);
-            $table->string('other_side_type')->nullable();
-            $table->string('other_side_name')->nullable();
-            $table->double('price')->nullable();
-            $table->string('currency')->nullable();
+            $table->string('other_side_type');
+            $table->string('other_side_name');
+            $table->double('price');
+            $table->string('currency');
             $table->string('tag');
             $table->string('file');
             $table->timestamps();
+
+            $table->foreign('folder_id')->references('id')->on('folders')->onDelete('cascade');
         });
     }
 

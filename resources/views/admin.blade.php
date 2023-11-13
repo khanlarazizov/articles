@@ -4,32 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="plugins/amsify/amsify.suggestags.css">
+    <link rel="stylesheet" href="{{asset('plugins/amsify/amsify.suggestags.css')}}">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+
+    <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" >
 <div class="wrapper">
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -55,8 +65,14 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
+                    <li class="nav-item">
+                        <a href="{{route('folder.index')}}"
+                           class="nav-link {{Route::is('folder.index') ? 'active' : '' }}">
+                            <p>Qovluq</p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-is-opening menu-open">
+                        <a href="#" class="nav-link">
                             <i class="fa-solid fa-file-contract" style="color: #ffffff;"></i>
                             <p>
                                 Sənədlər
@@ -66,8 +82,14 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('contract.index')}}"
-                                   class="nav-link {{Route::is('contract.index') || Route::is('contract.create') ? 'active' : '' }}">
+                                   class="nav-link {{Route::is('contract.index') || Route::is('contract.create') || Route::is('contract.edit') ? 'active' : '' }}">
                                     <p>Müqavilə</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('protocol.index')}}"
+                                   class="nav-link {{Route::is('protocol.index') || Route::is('protocol.create')  || Route::is('protocol.edit') ? 'active' : '' }}">
+                                    <p>Protokol</p>
                                 </a>
                             </li>
                         </ul>
@@ -88,7 +110,10 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                @yield('content')
+                <div class="card-body">
+                    @yield('content')
+                </div>
+
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
@@ -99,5 +124,32 @@
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
-</div></body>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="{{asset('dist/js/adminlte.js?v=3.2.0')}}"></script>
+<script>
+    @if(Session::has('message'))
+    var type="{{Session::get('alert-type'),'info'}}"
+    switch (type){
+        case 'info':
+            toastr.info("{{Session::get('message')}}");
+            break;
+
+        case 'success':
+            toastr.success("{{Session::get('message')}}");
+            break;
+
+        case 'warning':
+            toastr.warning("{{Session::get('message')}}");
+            break;
+
+        case 'error':
+            toastr.error("{{Session::get('message')}}");
+            break;
+
+    }
+    @endif
+</script>
+</body>
 </html>

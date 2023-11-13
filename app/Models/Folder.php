@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Contract extends Model
+class Folder extends Model
 {
     use HasFactory,Sluggable;
-    protected $guarded=[];
-    public $timestamps = false;
+    protected $guarded = ['id','created_at','updated_at'];
 
     public function sluggable(): array
     {
@@ -23,13 +22,8 @@ class Contract extends Model
         ];
     }
 
-    public function protocols():HasMany
+    public function contracts():HasMany
     {
-        return $this->hasMany(Protocol::class);
-    }
-
-    public function folder():HasOne
-    {
-        return $this->hasOne(Folder::class,'id','folder_id');
+       return $this->hasMany(Contract::class);
     }
 }

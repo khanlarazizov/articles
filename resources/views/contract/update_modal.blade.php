@@ -1,5 +1,6 @@
 <!-- Modal -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <form action="" method="post" id="updateContractForm">
@@ -11,10 +12,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-                    <div class="errMsgContainer">
-
-                    </div>
 
                     <input type="text" name="contract_id" id="contract_id">
 
@@ -47,14 +44,14 @@
 
                     <div class="row">
                         <div class="form-group col-6 shopping">
-                            <input class="otherside-input" type="radio" name="shopping" id="edit_shopping"
+                            <input class="otherside-input" type="radio" name="shopping" id="edit_shopping1"
                                    value="Biz alırıq">
                             <label class="otherside-label" for="otherside">
                                 Biz alırıq
                             </label>
                         </div>
                         <div class="form-group col-6 shopping">
-                            <input class="otherside-input" type="radio" name="shopping" id="edit_shopping"
+                            <input class="otherside-input" type="radio" name="shopping" id="edit_shopping2"
                                    value="Biz satırıq">
                             <label class="otherside-label" for="otherside">
                                 Biz satırıq
@@ -66,13 +63,13 @@
                     <div class="form-group row">
                         <div class="col-6">
                             <input class="otherside-input checkperson" type="checkbox" name="other_side_type"
-                                   id="edit_other_side_type"
+                                   id="edit_other_side_type1"
                                    value="Fiziki şəxs">
                             <label class="otherside-label" for="otherside">Fiziki şəxs</label>
                         </div>
                         <div class="col-6">
                             <input class="otherside-input textperson" type="text" name="other_side_type"
-                                   id="edit_other_side_type"
+                                   id="edit_other_side_type2"
                                    placeholder="Şirkət adı">
                         </div>
                         <span id="edit_otherSideTypeError" class="text-danger error-message"></span>
@@ -119,7 +116,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıx</button>
-                    <button type="button" class="btn btn-primary update_contract" >Redaktə et</button>
+                    <button type="button" class="btn btn-primary update_contract">Redaktə et</button>
                 </div>
             </div>
         </div>

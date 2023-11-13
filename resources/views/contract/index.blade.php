@@ -6,11 +6,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
               crossorigin="anonymous">
-        <div class="col-10"><h1 class="m-0">Müqavilələr</h1></div>
-        {{--        <div class="col-2"><a class="btn btn-primary" href="{{route('contract.create')}}" role="button">Müqavilə--}}
-        {{--                Əlavə Et</a></div>--}}
-        <div class="col-2"><a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#addModal">Müqavilə
+        <div class="col-10"><h1 class="ps-4">Müqavilələr</h1></div>
+        <div class="col-2"><a class="btn btn-primary" href="{{route('contract.create')}}" role="button">Müqavilə
                 Əlavə Et</a></div>
+{{--        <div class="col-2"><a class="btn btn-primary contract_button" role="button" data-bs-toggle="modal" data-bs-target="#addModal">Müqavilə--}}
+{{--                Əlavə Et</a></div>--}}
     </div>
     @php
         use Carbon\Carbon;
@@ -31,24 +31,24 @@
         </tr>
         </thead>
         <tbody>
-{{--        @foreach($data as $key)--}}
-{{--            <tr>--}}
-{{--                <th>{{$loop->iteration}}</th>--}}
-{{--                <td>{{$key->name}}</td>--}}
-{{--                <td>{{$key->shopping}}</td>--}}
-{{--                <td>{{Carbon::now()->diffInMonths($key->date)}}</td>--}}
-{{--                <td>{{$key->price}}</td>--}}
+        @foreach($contracts as $key)
+            <tr id="row-{{$key->id}}">
+                <th>{{$loop->iteration}}</th>
+                <td>{{$key->name}}</td>
+                <td>{{$key->shopping}}</td>
+                <td>{{Carbon::now()->diffInMonths($key->date)}}</td>
+                <td>{{$key->price}}</td>
 
-{{--                <td><a href="" class="btn edit_contract"><i class="fa-regular fa-pen-to-square"--}}
-{{--                                                                                  style="color: #34c832;"></i></a></td>--}}
-{{--                <td><a href="" class="btn"><i class="fa-solid fa-trash"--}}
-{{--                                                                                   style="color: #ff0000;"></i></a></td>--}}
-{{--            </tr>--}}
-{{--        @endforeach--}}
+                <td><a href="{{route('contract.edit', $key->id)}}" class="btn"><i class="fa-regular fa-pen-to-square"
+                                                                                  style="color: #34c832;"></i></a></td>
+                <td><a href="" class="btn delete_contract" data-id="{{$key->id}}"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></a></td>
+                <td><a href="{{route('contract.download',$key->id)}}" class="btn"><i class="fa-solid fa-download"></i></a></td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
-    @include('contract.create_modal')
-    @include('contract.update_modal')
-    @include('contract.delete_contract')
+    <div class="pt-3">{{ $contracts->appends(request()->all())->links() }}</div>
+{{--    @include('contract.create_modal')--}}
+{{--    @include('contract.update_modal')--}}
     @include('contract.js')
 @endsection
