@@ -100,7 +100,7 @@ class protocolController extends Controller
         ]);
 
         $protocol = Protocol::find($id);
-        $input = $request->all();
+        $protocol = Protocol::find($id);
 
         $fileName = '';
         if ($request->hasFile('file')) {
@@ -110,12 +110,20 @@ class protocolController extends Controller
             if ($protocol->file) {
                 Storage::delete('public/documents/protocols/' . $protocol->file);
             }
-            $input['file'] = $fileName;
         } else {
-            unset($input['file']);
+            $fileName = $protocol->file;
         }
 
-        $protocol->update($input);
+        $protocol->update([
+            'name' => $request->name,
+            'date' => Carbon::parse($request->date)->format('Y-m-d'),
+            'contract_id' => $request->contract_id,
+            'other_side_name' => $request->other_side_name,
+            'price' => $request->price,
+            'currency' => $request->currency,
+            'tag' => $request->tag,
+            'file' => $fileName
+        ]);
 
         $notification = array(
             'message' => $request->name." adlı protokol uğurla redaktə edildi" ,
