@@ -88,7 +88,7 @@ class protocolController extends Controller
             'price' => 'required',
             'tag' => 'required',
             'currency' => 'required',
-            'file' => 'mimes:pdf'
+//            'file' => 'mimes:pdf'
         ], [
             'name.required' => 'Ad daxil edin',
             'date.required' => 'Tarix daxil edin',
@@ -96,7 +96,7 @@ class protocolController extends Controller
             'price.required' => 'Dəyər daxil edin',
             'tag.required' => 'Etiket daxil edin',
             'currency.required' => 'Ad daxil edin',
-            'file.mimes' => 'Fayl pdf olmalıdır'
+//            'file.required' => 'Fayl daxil edin'
         ]);
 
         $protocol = Protocol::find($id);

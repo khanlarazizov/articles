@@ -49,10 +49,11 @@ class contractController extends Controller
             'file.required' => 'Fayl daxil edin'
         ]);
 
-        $file = $request->file('file');
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/documents/contracts', $fileName);
-
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('public/documents/contracts', $fileName);
+        }
 
         Contract::create([
             'name' => $request->name,
@@ -96,7 +97,7 @@ class contractController extends Controller
             'price' => 'required',
             'tag' => 'required',
             'currency' => 'required',
-            'file' => 'mimes:pdf'
+//            'file' => 'required|mimes:pdf'
         ], [
             'name.required' => 'Ad daxil edin',
             'date.required' => 'Tarix daxil edin',
@@ -108,12 +109,12 @@ class contractController extends Controller
             'price.required' => 'Dəyər daxil edin',
             'tag.required' => 'Etiket daxil edin',
             'currency.required' => 'Ad daxil edin',
-            'file.mimes' => 'Fayl pdf olmalıdır'
+//            'file.required' => 'Fayl daxil edin'
         ]);
 
 
         $contract = Contract::find($id);
-        
+
         $fileName = '';
         if ($request->hasFile('file')) {
             $file = $request->file('file');
