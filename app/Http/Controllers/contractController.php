@@ -113,22 +113,31 @@ class contractController extends Controller
 
 
         $contract = Contract::find($id);
-        $input = $request->all();
+        $protocol = Protocol::find($id);
 
         $fileName = '';
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents/contracts', $fileName);
-            if ($contract->file) {
-                Storage::delete('public/documents/contracts/' . $contract->file);
+            $file->storeAs('public/documents/protocols', $fileName);
+            if ($protocol->file) {
+                Storage::delete('public/documents/protocols/' . $protocol->file);
             }
-            $input['file'] = $fileName;
         } else {
-            unset($input['file']);
+            $fileName = $protocol->file;
         }
 
-        $contract->update($input);
+        $protocol->update([
+            'name' => $request->name,
+            'date' => Carbon::parse($request->date)->format('Y-m-d'),
+            'contract_id' => $request->contract_id,
+            'other_side_name' => $request->other_side_name,
+            'price' => $request->price,
+            'currency' => $request->currency,
+            'tag' => $request->tag,
+            'file' => $fileName
+        ]);
+
 
         $notification = array(
             'message' => $request->name." adlı müqavilə uğurla redaktə edildi" ,
