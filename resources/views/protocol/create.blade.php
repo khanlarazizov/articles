@@ -69,7 +69,7 @@
 
                 <div class="form-group">
                     <label for="price">Dəyər</label>
-                    <input type="text" class="form-control" aria-label="First name" id="price"
+                    <input type="number" class="form-control" aria-label="First name" id="price"
                            name="price">
                     <span id="priceError" class="text-danger error-message"></span>
                 </div>

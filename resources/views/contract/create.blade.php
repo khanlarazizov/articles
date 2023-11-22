@@ -131,7 +131,7 @@
                 <div class="form-group">
                     <label for="price">Dəyər</label>
                     <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         aria-label="First name"
                         id="price"
