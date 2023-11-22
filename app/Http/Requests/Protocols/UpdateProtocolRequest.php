@@ -32,7 +32,7 @@ class UpdateProtocolRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Ad daxil edin',
