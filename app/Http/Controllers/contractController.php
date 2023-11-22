@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Contracts\StoreContractRequest;
+use App\Http\Requests\Contracts\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Folder;
 use Carbon\Carbon;
@@ -21,34 +23,8 @@ class contractController extends Controller
         $folders = Folder::all();
         return view('contract.create',compact('folders'));
     }
-    public function store(Request $request)
+    public function store(StoreContractRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'date' => 'required',
-            'folder_id'=>'required',
-            'type' => 'required',
-            'shopping' => 'required',
-            'other_side_type' => 'required',
-            'other_side_name' => 'required',
-            'price' => 'required',
-            'tag' => 'required',
-            'currency' => 'required',
-            'file' => 'required|mimes:pdf'
-        ], [
-            'name.required' => 'Ad daxil edin',
-            'date.required' => 'Tarix daxil edin',
-            'folder_id.required' => 'Qovluq daxil edin',
-            'type.required' => 'Tip daxil edin',
-            'shopping.required' => 'nese daxil edin',
-            'other_side_type.required' => 'Tip daxil edin',
-            'other_side_name.required' => 'Təmsilçini daxil edin',
-            'price.required' => 'Dəyər daxil edin',
-            'tag.required' => 'Etiket daxil edin',
-            'currency.required' => 'Ad daxil edin',
-            'file.required' => 'Fayl daxil edin'
-        ]);
-
         if ($request->hasFile('file')){
             $file = $request->file('file');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
@@ -84,35 +60,8 @@ class contractController extends Controller
         return view('contract.edit',compact('contract','folders'));
     }
 
-    public function update(Request $request,string $id)
+    public function update(UpdateContractRequest $request,string $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'date' => 'required',
-            'folder_id'=>'required',
-            'type' => 'required',
-            'shopping' => 'required',
-            'other_side_type' => 'required',
-            'other_side_name' => 'required',
-            'price' => 'required',
-            'tag' => 'required',
-            'currency' => 'required',
-            'file' => 'mimes:pdf'
-        ], [
-            'name.required' => 'Ad daxil edin',
-            'date.required' => 'Tarix daxil edin',
-            'folder_id.required' => 'Qovluq daxil edin',
-            'type.required' => 'Tip daxil edin',
-            'shopping.required' => 'nese daxil edin',
-            'other_side_type.required' => 'Tip daxil edin',
-            'other_side_name.required' => 'Təmsilçini daxil edin',
-            'price.required' => 'Dəyər daxil edin',
-            'tag.required' => 'Etiket daxil edin',
-            'currency.required' => 'Ad daxil edin',
-            'file.mimes' => 'Fayl pdf olmalıdır'
-        ]);
-
-
         $contract = Contract::find($id);
 
         $fileName = '';

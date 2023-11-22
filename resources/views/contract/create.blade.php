@@ -16,6 +16,15 @@
         <form action="{{route('contract.store')}}" method="post" id="addContractForm" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
+                @if($errors->any())
+                    <div>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li class="alert-danger">{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-group">
                     <label for="name">Ad</label>
                     <input type="text" class="form-control" name="name" id="name">

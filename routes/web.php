@@ -19,11 +19,8 @@ Route::prefix('contract')->controller(contractController::class)->group(function
     Route::get('download/{id}','download')->name('contract.download');
 });
 
-
-
 Route::prefix('protocol')->controller(protocolController::class)->group(function (){
     Route::get('index','index')->name('protocol.index');
-    Route::get('fetch','fetch')->name('protocol.fetch');
 
     Route::get('create','create')->name('protocol.create');
     Route::post('store','store')->name('protocol.store');
@@ -49,16 +46,3 @@ Route::prefix('folder')->controller(folderController::class)->group(function (){
 
     Route::delete('delete/{id}','delete')->name('folder.delete');
 });
-
-
-
-//COMPANY
-Route::get('company.index', [companyController::class, 'index'])->name('company.index');
-Route::get('company.fetch', [companyController::class, 'fetch'])->name('company.fetch');
-
-Route::post('company.store', [companyController::class, 'store'])->name('company.store');
-
-Route::get('company.edit.{id}', [companyController::class, 'edit'])->name('company.edit');
-Route::post('company.update.{id}', [companyController::class, 'update'])->name('company.update');
-
-Route::delete('company.delete.{id}', [companyController::class, 'delete'])->name('company.delete');

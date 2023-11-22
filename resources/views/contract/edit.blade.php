@@ -21,7 +21,7 @@
                     <div>
                         <ul>
                             @foreach($errors->all() as $error)
-                                <li><div>{{$error}}</div></li>
+                                <li class="alert-danger">{{$error}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -178,12 +178,12 @@
                     <div class="form-group">
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Fayl seç</label>
-                            <iframe
+                            <embed
                                 src="{{asset('storage/documents/contracts/')}}/{{$contract->file}}"
                                 type="application/pdf"
                                 height="100%"
                                 width="100%"
-                            ></iframe>
+                            >
                             <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                         </div>
                         <span id="fileError" class="text-danger error-message"></span>

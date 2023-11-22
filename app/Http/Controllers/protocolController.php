@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Protocols\StoreProtocolRequest;
+use App\Http\Requests\Protocols\UpdateProtocolRequest;
 use App\Models\Contract;
 use App\Models\Protocol;
 use Illuminate\Http\Request;
@@ -28,24 +30,8 @@ class protocolController extends Controller
         return view('protocol.create', compact('contracts'));
     }
 
-    public function store(Request $request)
+    public function store(StoreProtocolRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'date' => 'required',
-            'other_side_name' => 'required',
-            'price' => 'required',
-            'tag' => 'required',
-            'file' => 'required|mimes:pdf'
-        ], [
-            'name.required' => 'Ad daxil edin',
-            'date.required' => 'Tarix daxil edin',
-            'other_side_name.required' => 'Təmsilçini daxil edin',
-            'price.required' => 'Dəyər daxil edin',
-            'tag.required' => 'Etiket daxil edin',
-            'file.required' => 'Fayl daxil edin'
-        ]);
-
         if ($request->hasFile('file')){
             $file = $request->file('file');
             $fileName = time() . '.' . $file->getClientOriginalExtension();
@@ -63,7 +49,6 @@ class protocolController extends Controller
             'file' => $fileName
         ]);
 
-
         $notification = array(
             'message' => $request->name." adlı protokol siyahıya uğurla əlavə edildi" ,
             'alert-type' => 'success'
@@ -79,26 +64,8 @@ class protocolController extends Controller
         return view('protocol.edit',compact('protocol','contracts'));
     }
 
-    public function update(Request $request,$id)
+    public function update(UpdateProtocolRequest $request,$id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'date' => 'required',
-            'other_side_name' => 'required',
-            'price' => 'required',
-            'tag' => 'required',
-            'currency' => 'required',
-            'file' => 'mimes:pdf'
-        ], [
-            'name.required' => 'Ad daxil edin',
-            'date.required' => 'Tarix daxil edin',
-            'other_side_name.required' => 'Təmsilçini daxil edin',
-            'price.required' => 'Dəyər daxil edin',
-            'tag.required' => 'Etiket daxil edin',
-            'currency.required' => 'Ad daxil edin',
-            'file.mimes' => 'Fayl pdf olmalıdır'
-        ]);
-
         $protocol = Protocol::find($id);
 
         $fileName = '';

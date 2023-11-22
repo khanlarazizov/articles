@@ -31,7 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($folder->contracts as $key)
+        @foreach($contracts as $key)
             <tr id="row-{{$key->id}}">
                 <th>{{$loop->iteration}}</th>
                 <td>{{$key->name}}</td>
