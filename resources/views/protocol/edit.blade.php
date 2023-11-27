@@ -125,9 +125,5 @@
         </form>
     </div>
 
-
-    {{--    @include('protocol.create_modal')--}}
-    {{--    @include('protocol.update_modal')--}}
-    {{--    @include('protocol.delete_protocol')--}}
     @include('protocol.js')
 @endsection

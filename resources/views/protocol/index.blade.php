@@ -84,8 +84,5 @@
         </table>
     <div class="pt-3">{{ $protocols->appends(request()->all())->links() }}</div>
 
-    {{--    @include('protocol.create_modal')--}}
-    {{--    @include('protocol.update_modal')--}}
-    {{--    @include('protocol.delete_protocol')--}}
-        @include('protocol.js')
+    @include('protocol.js')
 @endsection
