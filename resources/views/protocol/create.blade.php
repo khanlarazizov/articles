@@ -29,36 +29,41 @@
                 @endif
                 <div class="form-group">
                     <label for="name">Ad</label>
-                    <input type="text" class="form-control" name="name" id="name">
-                    <span id="nameError" class="text-danger error-message"></span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="name"
+                        value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="datapicker">Tarix</label>
                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                        <input type="text" class="form-control" name="date" id="date">
+                        <input type="text" class="form-control" name="date" id="date" value="{{ old('date') }}">
                         <span class="input-group-append">
                         <span class="input-group-text bg-white d-block">
                             <i class="fa fa-calendar"></i></span></span>
                     </div>
-                    <span id="dateError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="other_side_name">Müqavilə</label>
                     <select class="form-select" aria-label="Default select example" name="contract_id">
                         @foreach($contracts as $key )
-                            <option value="{{$key->id}}">{{$key->name}}</option>
+                            <option value="{{$key->id}}" {{ old('contract_id') == $key->id ? 'selected' : '' }}>{{$key->name}}</option>
                         @endforeach
                     </select>
-                    <span id="contractError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="other_side_name">Təmsilçi</label>
-                    <input type="text" class="form-control" aria-label="First name" id="other_side_name"
-                           name="other_side_name">
-                    <span id="otherSideNameError" class="text-danger error-message"></span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="other_side_name"
+                        name="other_side_name"
+                        value="{{ old('other_side_name') }}">
                 </div>
 
 {{--                <div class="form-group">--}}
@@ -71,36 +76,44 @@
 
                 <div class="form-group">
                     <label for="tag">Etiket</label>
-                    <input type="text" class="form-control" aria-label="First name" id="tag"
-                           name="tag" placeholder="">
-                    <span id="tagError" class="text-danger error-message"></span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="tag"
+                        name="tag"
+                        value="{{ old('tag') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="price">Dəyər</label>
-                    <input type="number" class="form-control" aria-label="First name" id="price"
-                           name="price">
-                    <span id="priceError" class="text-danger error-message"></span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="price"
+                        value="{{ old('price') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="currency">Valyuta</label>
                     <select class="form-control" id="currency" name="currency">
-                        <option>AZN</option>
-                        <option>USD</option>
+                        <option value="AZN" {{ old('currency') == 'AZN' ? 'selected' : '' }}>AZN</option>
+                        <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD</option>
                     </select>
-                    <span id="currencyError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
-                        <input class="form-control" type="file" id="file" name="file" accept=".pdf">
+                        <input
+                            class="form-control"
+                            type="file"
+                            id="file"
+                            name="file"
+                            accept=".pdf">
                     </div>
-                    <span id="fileError" class="text-danger error-message"></span>
                 </div>
             </div>
-
 
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">

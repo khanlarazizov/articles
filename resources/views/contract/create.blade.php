@@ -27,8 +27,12 @@
                 @endif
                 <div class="form-group">
                     <label for="name">Ad</label>
-                    <input type="text" class="form-control" name="name" id="name">
-                    <span id="nameError" class="text-danger error-message"></span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="name"
+                        value="{{ old('name') }}">
                 </div>
 
                 <div class="form-group">
@@ -38,32 +42,32 @@
                             type="text"
                             class="form-control"
                             name="date"
-                            id="date">
+                            id="date"
+                            value="{{ old('date') }}">
                         <span class="input-group-append">
                         <span class="input-group-text bg-white d-block">
                             <i class="fa fa-calendar"></i></span></span>
                     </div>
-                    <span id="dateError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="other_side_name">Qovluq</label>
                     <select class="form-select" aria-label="Default select example" name="folder_id">
                         @foreach($folders as $key)
-                            <option value="{{$key->id}}">{{$key->name}}</option>
+                            <option
+                                value="{{$key->id}}" {{ old('folder_id') == $key->id ? 'selected' : ''}}>{{$key->name}}</option>
                         @endforeach
                     </select>
-                    <span id="folderError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="type">Növ</label>
                     <select class="form-control" id="type" name="type">
-                        <option value="Partnyorluq">Partnyorluq</option>
-                        <option value="Xidmət">Xidmət</option>
-                        <option value="Alqı-satqı">Alqı-satqı</option>
+                        <option value="Partnyorluq" {{old('type')=='Partnyorluq' ? 'selected' : ''}}>Partnyorluq
+                        </option>
+                        <option value="Xidmət" {{old('type')=='Xidmət' ? 'selected' : ''}}>Xidmət</option>
+                        <option value="Alqı-satqı" {{old('type')=='Alqı-satqı' ? 'selected' : ''}}>Alqı-satqı</option>
                     </select>
-                    <span id="typeError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="row">
@@ -74,24 +78,23 @@
                             name="shopping"
                             id="shopping1"
                             value="Biz alırıq"
-                            checked>
-                        <label class="otherside-label" for="otherside">
+                            {{ old('shopping') =='Biz alırıq' ? 'checked' : ''}} checked>
+                        <label class="otherside-label" for="shopping1">
                             Biz alırıq
                         </label>
                     </div>
                     <div class="form-group col-6 shopping">
                         <input
-
                             class="otherside-input"
                             type="radio"
                             name="shopping"
-                            id="shopping1"
-                            value="Biz satırıq">
-                        <label class="otherside-label" for="otherside">
+                            id="shopping2"
+                            value="Biz satırıq"
+                            {{ old('shopping') == 'Biz satırıq' ? 'checked' : ''}}>
+                        <label class="otherside-label" for="shopping2">
                             Biz satırıq
                         </label>
                     </div>
-                    <span id="shoppingError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group row">
@@ -100,19 +103,24 @@
                             class="otherside-input checkperson"
                             type="checkbox"
                             name="other_side_type"
-                            id="other_side_type"
-                            value="Fiziki şəxs">
-                        <label class="otherside-label" for="otherside">Fiziki şəxs</label>
+                            id="other_side_type1"
+                            value="Fiziki şəxs"
+                            {{ old('other_side_type') == 'Fiziki şəxs' ? 'checked' : ''}}>
+                        <label class="otherside-label" for="other_side_type1">Fiziki şəxs</label>
                     </div>
                     <div class="col-6">
                         <input
                             class="otherside-input textperson"
                             type="text"
                             name="other_side_type"
-                            id="other_side_type"
-                            placeholder="Şirkət adı">
+                            id="other_side_type2"
+                            placeholder="Şirkət adı"
+                            @if(old('other_side_type') == 'Fiziki şəxs')
+                                disabled
+                            @else
+                                value="{{ old('other_side_type') }}"
+                            @endif>
                     </div>
-                    <span id="otherSideTypeError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -120,10 +128,9 @@
                     <input
                         type="text"
                         class="form-control"
-                        aria-label="First name"
                         id="other_side_name"
-                        name="other_side_name">
-                    <span id="otherSideNameError" class="text-danger error-message"></span>
+                        name="other_side_name"
+                        value="{{ old('other_side_name') }}">
                 </div>
 
                 <div class="form-group">
@@ -131,10 +138,9 @@
                     <input
                         type="text"
                         class="form-control"
-                        aria-label="First name"
                         id="tag"
-                        name="tag" placeholder="">
-                    <span id="tagError" class="text-danger error-message"></span>
+                        name="tag"
+                        value="{{ old('tag') }}">
                 </div>
 
                 <div class="form-group">
@@ -142,34 +148,34 @@
                     <input
                         type="number"
                         class="form-control"
-                        aria-label="First name"
                         id="price"
-                        name="price">
-                    <span id="priceError" class="text-danger error-message"></span>
+                        name="price"
+                        value="{{ old('price') }}">
                 </div>
 
                 <div class="form-group">
                     <label for="currency">Valyuta</label>
                     <select class="form-control" id="currency" name="currency">
-                        <option>AZN</option>
-                        <option>USD</option>
+                        <option value="AZN" {{ old('currency') == 'AZN' ? 'selected' : '' }}>AZN</option>
+                        <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD</option>
                     </select>
-                    <span id="currencyError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
-                        <input class="form-control" type="file" id="file" name="file" accept=".pdf">
+                        <input class="form-control" type="file" id="file" name="file" accept=".pdf" >
                     </div>
-                    <span id="fileError" class="text-danger error-message"></span>
                 </div>
             </div>
 
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">
-                    <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda saxla</button>
-                    <a href="{{route('contract.index')}}" class="btn btn-secondary btn-lg active w-50" role="button" aria-pressed="true">Çıx</a>
+                    <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda
+                        saxla
+                    </button>
+                    <a href="{{route('contract.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
+                       aria-pressed="true">Çıx</a>
                 </div>
             </div>
         </form>
