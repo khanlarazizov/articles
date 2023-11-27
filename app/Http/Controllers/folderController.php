@@ -62,10 +62,10 @@ class folderController extends Controller
         Folder::find($id)->delete();
     }
 
-    public function folder($slug)
+    public function folder($id)
     {
         $contracts = Contract::with('protocols')->get();
-        $folder = Folder::with('contracts')->where('slug',$slug)->first();
+        $folder = Folder::with('contracts')->where('id',$id)->first();
 
         return view('contract.index',compact('folder'));
     }

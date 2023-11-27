@@ -14,7 +14,7 @@ class contractController extends Controller
 {
     public function index()
     {
-        $contracts = Contract::query()->with('protocols')->paginate(5);
+        $contracts = Contract::query()->with('protocols:id,name')->paginate(5);
         return view('contract.index', compact('contracts'));
     }
 
@@ -102,7 +102,7 @@ class contractController extends Controller
     {
         $contract = Contract::find($id);
         if (Storage::delete('public/documents/contracts/' . $contract->file)) {
-            Contract::destroy($id);
+            $contract->destroy($id);
         }
     }
 

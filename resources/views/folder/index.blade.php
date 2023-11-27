@@ -34,7 +34,7 @@
             @foreach($folder as $key)
                 <tr id="row-{{$key->id}}">
                     <th>{{$loop->iteration}}</th>
-                    <td><a href="{{route('folder',$key->slug)}}">{{$key->name}}</a></td>
+                    <td><a href="{{route('folder',$key->id)}}">{{$key->name}}</a></td>
                     <td><a href="" class="btn edit_folder" data-id="{{$key->id}}"><i class="fa-regular fa-pen-to-square"
                                                                 style="color: #34c832;"></i></a></td>
                     <td><a href="" class="btn delete_folder" data-id="{{$key->id}}"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></a></td>

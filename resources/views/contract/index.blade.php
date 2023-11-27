@@ -47,7 +47,7 @@
         @endforeach
         </tbody>
     </table>
-{{--    <div class="pt-3">{{ $contracts->appends(request()->all())->links() }}</div>--}}
+    <div class="pt-3">{{ $contracts->appends(request()->all())->links() }}</div>
 {{--    @include('contract.create_modal')--}}
 {{--    @include('contract.update_modal')--}}
     @include('contract.js')

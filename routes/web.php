@@ -36,7 +36,7 @@ Route::prefix('protocol')->controller(protocolController::class)->group(function
 
 Route::prefix('folder')->controller(folderController::class)->group(function (){
     Route::get('index','index')->name('folder.index');
-    Route::get('index/{slug:folders}','folder')->name('folder');
+    Route::get('index/{id:folders}','folder')->name('folder');
 
     Route::get('create','create')->name('folder.create');
     Route::post('store','store')->name('folder.store');
