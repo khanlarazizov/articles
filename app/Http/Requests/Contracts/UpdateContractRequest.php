@@ -24,7 +24,7 @@ class UpdateContractRequest extends FormRequest
         return [
             'name' => 'required',
             'date' => 'required',
-            'folder_id'=>'required',
+            'folder_id' => 'required',
             'type' => 'required',
             'shopping' => 'required',
             'other_side_type' => 'required',
