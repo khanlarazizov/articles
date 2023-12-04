@@ -19,9 +19,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
 
 {{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
 <script>
@@ -48,7 +47,246 @@
                 $('.textperson').removeAttr('disabled');
                 $('.textperson').focus();
             }
-        })
+        });
+
+        $('#addProtocolForm').validate({
+            ignore: [],
+            rules:{
+                name: {
+                    required:true
+                },
+                date: {
+                    required:true
+                },
+                other_side_name: {
+                    required:true
+                },
+                price: {
+                    required:true
+                },
+                tag: {
+                    required:true
+                },
+                currency: {
+                    required:true
+                },
+                file: {
+                    required:true,
+                    extension: "pdf"
+                }
+            },
+            messages: {
+                name: {
+                    required: 'Ad daxil edin'
+                },
+                date: {
+                    required: 'Tarix daxil edin'
+                },
+                other_side_name: {
+                    required: 'Təmsilçini daxil edin'
+                },
+                price: {
+                    required: 'Dəyər daxil edin'
+                },
+                tag: {
+                    required: 'Etiket daxil edin'
+                },
+                file: {
+                    required: 'Fayl daxil edin',
+                    extension: 'Fayl pdf olmalıdır'
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        $('#addContractForm').validate({
+            ignore: [],
+            rules:{
+                name: {
+                    required:true
+                },
+                date: {
+                    required:true
+                },
+                other_side_name: {
+                    required:true
+                },
+                type: {
+                    required:true
+                },
+                price: {
+                    required:true
+                },
+                tag: {
+                    required:true
+                },
+                shopping: {
+                    required:true
+                },
+                other_side_type: {
+                    required:true
+                },
+                currency: {
+                    required:true
+                },
+                file: {
+                    required:true,
+                    extension: "pdf"
+                }
+            },
+            messages: {
+                name: {
+                    required: 'Ad daxil edin'
+                },
+                date: {
+                    required: 'Tarix daxil edin'
+                },
+                other_side_name: {
+                    required: 'Təmsilçini daxil edin'
+                },
+                type: {
+                    required: 'Tip daxil edin'
+                },
+                shopping: {
+                    required: 'Alırıq/Satırıq daxil edin'
+                },
+                other_side_type: {
+                    required: 'İmzalayan tərəfi daxil edin'
+                },
+                price: {
+                    required: 'Dəyər daxil edin'
+                },
+                tag: {
+                    required: 'Etiket daxil edin'
+                },
+                file: {
+                    required: 'Fayl daxil edin',
+                    extension: 'Fayl pdf olmalıdır'
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        $('#editContractForm').validate({
+            ignore: [],
+            rules:{
+                name: {
+                    required:true
+                },
+                date: {
+                    required:true
+                },
+                other_side_name: {
+                    required:true
+                },
+                type: {
+                    required:true
+                },
+                price: {
+                    required:true
+                },
+                tag: {
+                    required:true
+                },
+                shopping: {
+                    required:true
+                },
+                other_side_type: {
+                    required:true
+                },
+                currency: {
+                    required:true
+                }
+            },
+            messages: {
+                name: {
+                    required: 'Ad daxil edin'
+                },
+                date: {
+                    required: 'Tarix daxil edin'
+                },
+                other_side_name: {
+                    required: 'Təmsilçini daxil edin'
+                },
+                type: {
+                    required: 'Tip daxil edin'
+                },
+                shopping: {
+                    required: 'Alırıq/Satırıq daxil edin'
+                },
+                other_side_type: {
+                    required: 'İmzalayan tərəfi daxil edin'
+                },
+                price: {
+                    required: 'Dəyər daxil edin'
+                },
+                tag: {
+                    required: 'Etiket daxil edin'
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        $(document).on('click', '.delete_contract', function (e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            Swal.fire({
+                title: 'Əminsinizmi?',
+                text: "Bunu geri qaytara bilməyəcəksiniz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Bəli, sil!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'contracts' + '/' + id,
+                        method: 'delete',
+                        async:false,
+                        success: function (response) {
+                            console.log(response);
+                            $("#row-" + id).remove();
+                            Swal.fire(
+                                'Silindi!',
+                                'Müqavilə silindi.',
+                                'success'
+                            );
+                        }
+                    });
+                }
+            })
+        });
 
         // $(document).on('click', '.contract_button', function (e) {
         //     $('.error-message').html('');
@@ -179,36 +417,5 @@
         //         });
         //     });
         // });
-
-        $(document).on('click', '.delete_contract', function (e) {
-            e.preventDefault();
-            var id = $(this).data("id");
-            Swal.fire({
-                title: 'Əminsinizmi?',
-                text: "Bunu geri qaytara bilməyəcəksiniz!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Bəli, sil!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: 'delete' + '/' + id,
-                        method: 'delete',
-                        async:false,
-                        success: function (response) {
-                            console.log(response);
-                            $("#row-" + id).remove();
-                            Swal.fire(
-                                'Silindi!',
-                                'Müqavilə silindi.',
-                                'success'
-                            );
-                        }
-                    });
-                }
-            })
-        });
     });
 </script>

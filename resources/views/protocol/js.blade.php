@@ -19,7 +19,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.min.js"></script>
 
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -46,6 +47,66 @@
     $(document).on('click', '.close_form', function () {
         window.location.href = 'protocol.index'
     })
+
+    $('#addProtocolForm').validate({
+        ignore: [],
+        rules:{
+            name: {
+                required:true
+            },
+            date: {
+                required:true
+            },
+            other_side_name: {
+                required:true
+            },
+            price: {
+                required:true
+            },
+            tag: {
+                required:true
+            },
+            currency: {
+                required:true
+            },
+            file: {
+                required:true,
+                extension: "pdf"
+            }
+        },
+        messages: {
+            name: {
+                required: 'Ad daxil edin'
+            },
+            date: {
+                required: 'Tarix daxil edin'
+            },
+            other_side_name: {
+                required: 'Təmsilçini daxil edin'
+            },
+            price: {
+                required: 'Dəyər daxil edin'
+            },
+            tag: {
+                required: 'Etiket daxil edin'
+            },
+            file: {
+                required: 'Fayl daxil edin',
+                extension: 'Fayl pdf olmalıdır'
+            }
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
 
     $('#editProtocolForm').validate({
         ignore: [],
@@ -101,9 +162,7 @@
 
     $(document).on('click','.btnClearFilter', function (event) {
         event.preventDefault();
-        let filters = $("#protocolFilter");
-
-        $(filters).val('').trigger('reset');
+        $("#protocolFilter").val('').trigger('reset');
     });
 
     $(document).on('click', '.delete_protocol_icon', function (event) {
@@ -120,7 +179,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: 'delete' + '/' + id,
+                    url: 'protocols' + '/' + id,
                     method: 'delete',
                     async:false,
                     success: function (response) {

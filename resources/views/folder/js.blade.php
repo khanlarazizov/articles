@@ -25,19 +25,19 @@
         }
     });
 
-    $(document).on('click','.add_folder',function (e) {
+    $(document).on('click', '.add_folder', function (e) {
         e.preventDefault();
         $('.error-message').html('');
         let formData = new FormData(document.getElementById('addFolderForm'));
 
         $.ajax({
-            type:"POST",
-            url:"store",
-            data:formData,
-            contentType:false,
-            processData:false,
+            type: "POST",
+            url: "folders",
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function (response) {
-                if (response.status=="success"){
+                if (response.status == "success") {
                     $("#addFolderModal").modal('hide');
                     $('.modal-backdrop').remove();
                     $("#addFolderForm").trigger('reset');
@@ -53,7 +53,7 @@
         });
     });
 
-    $(document).on('click','.edit_folder',function (e) {
+    $(document).on('click', '.edit_folder', function (e) {
         e.preventDefault();
         $('.error-message').html('');
         let folder_id = $(this).data('id');
@@ -61,8 +61,8 @@
         $('#editFolderModal').modal('show');
 
         $.ajax({
-            type:"GET",
-            url:"edit" + "/" + folder_id,
+            type: "GET",
+            url: "folders/" + folder_id + "/edit",
             success: function (response) {
                 $('#folder_id').val(folder_id);
                 $('#edit_folder_name').val(response.name);
@@ -70,22 +70,22 @@
         });
     });
 
-    $(document).on('click','.update_folder',function (e) {
+    $(document).on('click', '.update_folder', function (e) {
         e.preventDefault();
 
         let folder_id = $('#folder_id').val();
         let formData = new FormData(document.getElementById('editFolderForm'));
 
         $.ajax({
-            type: 'post',
-            url: "update" + "/" + folder_id,
+            type: "POST",
+            url: "folders/" + folder_id,
             data: formData,
+            // cache: false,
             dataType: 'json',
-            contentType:false,
-            processData:false,
+            // contentType: false,
+            processData: false,
             success: function (response) {
-                if (response.status == 'success'){
-                    console.log('asdad');
+                if (response.status == 'success') {
                     $('#editFolderModal').modal('hide');
                     $('.modal-backdrop').remove();
                     $("#editFolderForm").trigger('reset');
@@ -94,16 +94,12 @@
                 }
             },
             error: function (error) {
-                console.log('ddd');
                 $('#folderNameError').html(error.responseJSON.errors.name);
             }
-
         });
-
-
     });
 
-    $(document).on('click','.delete_folder',function (e) {
+    $(document).on('click', '.delete_folder', function (e) {
         e.preventDefault();
         let folder_id = $(this).data('id');
         Swal.fire({
@@ -118,8 +114,8 @@
             if (result.isConfirmed) {
                 $.ajax({
                     method: 'delete',
-                    url:'delete' + '/' + folder_id,
-                    async:false,
+                    url: 'folders/' + folder_id,
+                    async: false,
                     success: function (response) {
                         $("#row-" + folder_id).remove();
                         Swal.fire(
@@ -128,14 +124,10 @@
                             'success'
                         );
                     }
-
                 });
             }
         })
     });
-
-
-
 
 
 </script>
