@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class contractController extends Controller
+class ContractController extends Controller
 {
     public function index()
     {
@@ -50,20 +50,17 @@ class contractController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('contract.index')->with($notification);
+        return redirect()->route('contracts.index')->with($notification);
     }
 
-    public function edit(string $id)
+    public function edit(Contract $contract)
     {
-        $contract = Contract::find($id);
         $folders = Folder::all();
         return view('contract.edit',compact('contract','folders'));
     }
 
-    public function update(UpdateContractRequest $request,string $id)
+    public function update(UpdateContractRequest $request,Contract $contract)
     {
-        $contract = Contract::find($id);
-
         $fileName = '';
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -95,14 +92,13 @@ class contractController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('contract.index')->with($notification);
+        return redirect()->route('contracts.index')->with($notification);
     }
 
-    public function delete(string $id)
+    public function destroy(Contract $contract)
     {
-        $contract = Contract::find($id);
         if (Storage::delete('public/documents/contracts/' . $contract->file)) {
-            $contract->destroy($id);
+            $contract->delete();
         }
     }
 

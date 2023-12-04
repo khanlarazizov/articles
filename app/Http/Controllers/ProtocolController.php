@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
-class protocolController extends Controller
+class ProtocolController extends Controller
 {
     public function index(Request $request)
     {
@@ -54,20 +54,17 @@ class protocolController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('protocol.index')->with($notification);
+        return redirect()->route('protocols.index')->with($notification);
     }
 
-    public function edit($id)
+    public function edit(Protocol $protocol)
     {
-        $protocol = Protocol::find($id);
         $contracts = Contract::all();
         return view('protocol.edit',compact('protocol','contracts'));
     }
 
-    public function update(UpdateProtocolRequest $request,$id)
+    public function update(UpdateProtocolRequest $request, Protocol $protocol)
     {
-        $protocol = Protocol::find($id);
-
         $fileName = '';
         if ($request->hasFile('file')) {
             $file = $request->file('file');
@@ -96,20 +93,18 @@ class protocolController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('protocol.index')->with($notification);
+        return redirect()->route('protocols.index')->with($notification);
     }
 
-    public function delete(string $id)
+    public function destroy(Protocol $protocol)
     {
-        $protocol = Protocol::find($id);
         if (Storage::delete('public/documents/protocols/' . $protocol->file)) {
-            Protocol::destroy($id);
+            $protocol->delete();
         }
     }
 
-    public function download($id)
+    public function download(Protocol $protocol)
     {
-        $protocol= Protocol::find($id);
         return Storage::download('public/documents/protocols/' . $protocol->file);
     }
 }
