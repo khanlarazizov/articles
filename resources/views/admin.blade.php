@@ -3,8 +3,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{asset('plugins/amsify/amsify.suggestags.css')}}">
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
     <link rel="stylesheet"
@@ -66,8 +74,8 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{route('folder.index')}}"
-                           class="nav-link {{Route::is('folder.index') ? 'active' : '' }}">
+                        <a href="{{route('folders.index')}}"
+                           class="nav-link {{Route::is('folders.index') ? 'active' : '' }}">
                             <p>Qovluq</p>
                         </a>
                     </li>
@@ -81,14 +89,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('contract.index')}}"
-                                   class="nav-link {{Route::is('contract.index') || Route::is('contract.create') || Route::is('contract.edit') ? 'active' : '' }}">
+                                <a href="{{route('contracts.index')}}"
+                                   class="nav-link {{Route::is('contracts.index') || Route::is('contracts.create') || Route::is('contracts.edit') ? 'active' : '' }}">
                                     <p>Müqavilə</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('protocol.index')}}"
-                                   class="nav-link {{Route::is('protocol.index') || Route::is('protocol.create')  || Route::is('protocol.edit') ? 'active' : '' }}">
+                                <a href="{{route('protocols.index')}}"
+                                   class="nav-link {{Route::is('protocols.index') || Route::is('protocols.create')  || Route::is('protocols.edit') ? 'active' : '' }}">
                                     <p>Protokol</p>
                                 </a>
                             </li>
