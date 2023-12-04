@@ -1,13 +1,5 @@
 @extends('admin')
 @section('title','Protokollar')
-@section('content-header')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
@@ -15,14 +7,14 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form action="{{route('protocol.store')}}" method="post" id="addProtocolForm" enctype="multipart/form-data">
+        <form action="{{route('protocols.store')}}" method="post" id="addProtocolForm" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 @if($errors->any())
                     <div>
                         <ul>
                             @foreach($errors->all() as $error)
-                                <li class="alert-danger">{{$error}}</li>
+                                <li>{{$error}}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -38,7 +30,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="datapicker">Tarix</label>
+                    <label for="date">Tarix</label>
                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                         <input type="text" class="form-control" name="date" id="date" value="{{ old('date') }}">
                         <span class="input-group-append">
@@ -48,8 +40,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="other_side_name">Müqavilə</label>
-                    <select class="form-select" aria-label="Default select example" name="contract_id">
+                    <label for="contract_id">Müqavilə</label>
+                    <select class="form-control" aria-label="Default select example" name="contract_id" id="contract_id">
                         @foreach($contracts as $key )
                             <option value="{{$key->id}}" {{ old('contract_id') == $key->id ? 'selected' : '' }}>{{$key->name}}</option>
                         @endforeach
@@ -110,7 +102,8 @@
                             type="file"
                             id="file"
                             name="file"
-                            accept=".pdf">
+                            accept=".pdf"
+                        >
                     </div>
                 </div>
             </div>
@@ -118,7 +111,7 @@
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">
                     <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda saxla</button>
-                    <a href="{{route('protocol.index')}}" class="btn btn-secondary btn-lg active w-50" role="button" aria-pressed="true">Çıx</a>
+                    <a href="{{route('protocols.index')}}" class="btn btn-secondary btn-lg active w-50" role="button" aria-pressed="true">Çıx</a>
                 </div>
             </div>
         </form>

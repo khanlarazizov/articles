@@ -1,30 +1,22 @@
 @extends('admin')
 @section('title','Müqavilələr')
-@section('content-header')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Müqavilə Əlavə et</h3>
         </div>
-        <form action="{{route('contract.store')}}" method="post" id="addContractForm" enctype="multipart/form-data">
+        <form action="{{route('contracts.store')}}" method="post" id="addContractForm" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-                @if($errors->any())
-                    <div>
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li class="alert-danger">{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+{{--                @if($errors->any())--}}
+{{--                    <div>--}}
+{{--                        <ul>--}}
+{{--                            @foreach($errors->all() as $error)--}}
+{{--                                <li class="alert-danger">{{$error}}</li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
                 <div class="form-group">
                     <label for="name">Ad</label>
                     <input
@@ -174,7 +166,7 @@
                     <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda
                         saxla
                     </button>
-                    <a href="{{route('contract.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
+                    <a href="{{route('contracts.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
                        aria-pressed="true">Çıx</a>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 <!-- Edit Modal -->
 <div class="modal fade show" id="editFolderModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <form action="" method="post" id="editFolderForm">
+    <form method="POST" id="editFolderForm">
         @csrf
+        @method('put')
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

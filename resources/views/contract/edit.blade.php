@@ -1,19 +1,12 @@
 @extends('admin')
 @section('title','Müqavilələr')
-@section('content-header')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-@endsection
+
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">Müqavilə Redaktə et</h3>
         </div>
-        <form action="{{route('contract.update',$contract->id)}}" method="post" id="addContractForm"
+        <form action="{{route('contracts.update',$contract->id)}}" method="post" id="editContractForm"
               enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -35,7 +28,6 @@
                         name="name"
                         id="name"
                         value="{{ $contract->name }}">
-                    <span id="nameError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -51,7 +43,6 @@
                         <span class="input-group-text bg-white d-block">
                             <i class="fa fa-calendar"></i></span></span>
                     </div>
-                    <span id="dateError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -63,7 +54,6 @@
                                 {{ $key->name }}</option>
                         @endforeach
                     </select>
-                    <span id="folderError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -75,7 +65,6 @@
                         <option value="Alqı-satqı" {{ $contract->type=='Alqı-satqı' ? 'selected' : '' }}>Alqı-satqı
                         </option>
                     </select>
-                    <span id="typeError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="row">
@@ -104,7 +93,6 @@
                             Biz satırıq
                         </label>
                     </div>
-                    <span id="shoppingError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group row">
@@ -132,7 +120,6 @@
                             @endif
                         >
                     </div>
-                    <span id="otherSideTypeError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -144,7 +131,6 @@
                         id="other_side_name"
                         name="other_side_name"
                         value="{{ $contract->other_side_name }}">
-                    <span id="otherSideNameError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -156,7 +142,6 @@
                         id="tag"
                         name="tag"
                         value="{{ $contract->tag }}">
-                    <span id="tagError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -168,7 +153,6 @@
                         id="price"
                         name="price"
                         value="{{ $contract->price }}">
-                    <span id="priceError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -177,30 +161,28 @@
                         <option value="AZN" {{ $contract->currency == 'AZN' ? 'selected' : '' }}>AZN</option>
                         <option value="USD" {{ $contract->currency == 'USD' ? 'selected' : '' }}>USD</option>
                     </select>
-                    <span id="currencyError" class="text-danger error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
                         <embed
-                            src="{{asset('storage/documents/contracts/')}}/{{$contract->file}}"
+                            src="{{Storage::url('public/documents/contracts/' . $contract->file)}}"
                             type="application/pdf"
                             height="100%"
                             width="100%"
                         >
                         <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                     </div>
-                    <span id="fileError" class="text-danger error-message"></span>
                 </div>
             </div>
 
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">
-                    <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Redaktə
-                        et
+                    <button class="btn btn-primary btn-lg active w-50 me-2"
+                            type="submit" aria-pressed="true">Redaktə et
                     </button>
-                    <a href="{{route('contract.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
+                    <a href="{{route('contracts.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
                        aria-pressed="true">Çıx</a>
                 </div>
             </div>
