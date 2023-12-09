@@ -53,6 +53,12 @@ class ContractController extends Controller
         return redirect()->route('contracts.index')->with($notification);
     }
 
+    public function show(string $id)
+    {
+        $contract = Contract::with('folder:id,name')->find($id);
+        return response()->json($contract);
+    }
+
     public function edit(Contract $contract)
     {
         $folders = Folder::all();

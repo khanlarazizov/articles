@@ -77,12 +77,12 @@
         let formData = new FormData(document.getElementById('editFolderForm'));
 
         $.ajax({
-            type: "POST",
+            method: "POST",
             url: "folders/" + folder_id,
             data: formData,
             // cache: false,
             dataType: 'json',
-            // contentType: false,
+            contentType: false,
             processData: false,
             success: function (response) {
                 if (response.status == 'success') {

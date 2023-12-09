@@ -57,6 +57,13 @@ class ProtocolController extends Controller
         return redirect()->route('protocols.index')->with($notification);
     }
 
+    public function show(string $id)
+    {
+        $protocol = Protocol::with('contract:id,name')->find($id);
+        return response()->json($protocol);
+    }
+
+
     public function edit(Protocol $protocol)
     {
         $contracts = Contract::all();

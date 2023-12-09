@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="contract_id">Müqavilə</label>
+                    <label for="contract_id">Bağlı olduğu Müqavilə</label>
                     <select class="form-control" aria-label="Default select example" name="contract_id" id="contract_id">
                         @foreach($contracts as $key )
                             <option value="{{$key->id}}" {{ old('contract_id') == $key->id ? 'selected' : '' }}>{{$key->name}}</option>

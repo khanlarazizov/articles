@@ -19,8 +19,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/additional-methods.js"></script>--}}
 
 {{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
 <script>
@@ -49,99 +49,39 @@
             }
         });
 
-        $('#addProtocolForm').validate({
-            ignore: [],
-            rules:{
-                name: {
-                    required:true
-                },
-                date: {
-                    required:true
-                },
-                other_side_name: {
-                    required:true
-                },
-                price: {
-                    required:true
-                },
-                tag: {
-                    required:true
-                },
-                currency: {
-                    required:true
-                },
-                file: {
-                    required:true,
-                    extension: "pdf"
-                }
-            },
-            messages: {
-                name: {
-                    required: 'Ad daxil edin'
-                },
-                date: {
-                    required: 'Tarix daxil edin'
-                },
-                other_side_name: {
-                    required: 'Təmsilçini daxil edin'
-                },
-                price: {
-                    required: 'Dəyər daxil edin'
-                },
-                tag: {
-                    required: 'Etiket daxil edin'
-                },
-                file: {
-                    required: 'Fayl daxil edin',
-                    extension: 'Fayl pdf olmalıdır'
-                }
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-
         $('#addContractForm').validate({
             ignore: [],
-            rules:{
+            rules: {
                 name: {
-                    required:true
+                    required: true
                 },
                 date: {
-                    required:true
+                    required: true
                 },
                 other_side_name: {
-                    required:true
+                    required: true
                 },
                 type: {
-                    required:true
+                    required: true
                 },
                 price: {
-                    required:true
+                    required: true
                 },
                 tag: {
-                    required:true
+                    required: true
                 },
                 shopping: {
-                    required:true
+                    required: true
                 },
-                other_side_type: {
-                    required:true
+                other_side_type:{
+                    required: "#checkperson:not(:checked)"
                 },
                 currency: {
-                    required:true
+                    required: true
                 },
                 file: {
-                    required:true,
-                    extension: "pdf"
+                    required: true,
+                    accept: "pdf"
                 }
             },
             messages: {
@@ -171,7 +111,7 @@
                 },
                 file: {
                     required: 'Fayl daxil edin',
-                    extension: 'Fayl pdf olmalıdır'
+                    accept: 'Fayl pdf olmalıdır'
                 }
             },
             errorElement: 'span',
@@ -184,38 +124,42 @@
             },
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
-            }
+            },
+
         });
 
         $('#editContractForm').validate({
             ignore: [],
-            rules:{
+            rules: {
                 name: {
-                    required:true
+                    required: true
                 },
                 date: {
-                    required:true
+                    required: true
                 },
                 other_side_name: {
-                    required:true
+                    required: true
                 },
                 type: {
-                    required:true
+                    required: true
                 },
                 price: {
-                    required:true
+                    required: true
                 },
                 tag: {
-                    required:true
+                    required: true
                 },
                 shopping: {
-                    required:true
+                    required: true
                 },
                 other_side_type: {
-                    required:true
+                    required: true
                 },
                 currency: {
-                    required:true
+                    required: true
+                },
+                file: {
+                    accept: "pdf"
                 }
             },
             messages: {
@@ -242,6 +186,9 @@
                 },
                 tag: {
                     required: 'Etiket daxil edin'
+                },
+                file: {
+                    accept: "Fayl pdf olmalıdır"
                 }
             },
             errorElement: 'span',
@@ -257,7 +204,30 @@
             }
         });
 
-        $(document).on('click', '.delete_contract', function (e) {
+        $(document).on('click', '.btnShowContract', function (event) {
+            event.preventDefault();
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'contracts/' + id,
+                type: 'get',
+                success: function (response) {
+                    $('#contract_id').text(response.id)
+                    $('#contract_name').text(response.name)
+                    $('#contract_date').text(response.date)
+                    $('#contract_folder_id').text(response.folder.name)
+                    $('#contract_type').text(response.type)
+                    $('#contract_shopping').text(response.shopping)
+                    $('#contract_other_side_type').text(response.other_side_type)
+                    $('#contract_other_side_name').text(response.other_side_name)
+                    $('#contract_tag').text(response.tag)
+                    $('#contract_price').text(response.price)
+                    $('#contract_currency').text(response.currency)
+                }
+            });
+        })
+
+        $(document).on('click', '.btnDeleteContract', function (e) {
             e.preventDefault();
             var id = $(this).data("id");
             Swal.fire({
@@ -273,7 +243,7 @@
                     $.ajax({
                         url: 'contracts' + '/' + id,
                         method: 'delete',
-                        async:false,
+                        async: false,
                         success: function (response) {
                             console.log(response);
                             $("#row-" + id).remove();

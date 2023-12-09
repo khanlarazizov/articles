@@ -71,7 +71,7 @@
             },
             file: {
                 required:true,
-                extension: "pdf"
+                accept: "pdf"
             }
         },
         messages: {
@@ -92,7 +92,7 @@
             },
             file: {
                 required: 'Fayl daxil edin',
-                extension: 'Fayl pdf olmalıdır'
+                accept: 'Fayl pdf olmalıdır'
             }
         },
         errorElement: 'span',
@@ -128,6 +128,9 @@
             },
             currency: {
                 required:true
+            },
+            file: {
+                accept: "pdf"
             }
         },
         messages: {
@@ -146,6 +149,9 @@
             tag: {
                 required: 'Etiket daxil edin'
             },
+            file: {
+                accept: "Fayl pdf olmalıdır"
+            }
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -165,7 +171,26 @@
         $("#protocolFilter").val('').trigger('reset');
     });
 
-    $(document).on('click', '.delete_protocol_icon', function (event) {
+    $(document).on('click', '.btnShowProtocol', function (event) {
+        event.preventDefault();
+        var id = $(this).data("id");
+        $.ajax({
+            url: 'protocols/' + id,
+            type: 'get',
+            success: function (response) {
+                $('#protocol_id').text(response.id);
+                $('#protocol_name').text(response.name);
+                $('#protocol_date').text(response.date);
+                $('#protocol_contract_id').text(response.contract.name);
+                $('#protocol_other_side_name').text(response.other_side_name);
+                $('#protocol_tag').text(response.tag);
+                $('#protocol_price').text(response.price);
+                $('#protocol_currency').text(response.currency);
+            }
+        });
+    })
+
+    $(document).on('click', '.btnDeleteProtocol', function (event) {
         event.preventDefault();
         var id = $(this).data("id");
         Swal.fire({
@@ -196,7 +221,7 @@
         });
     });
 
-    // $(document).on('click', '.download_protocol_icon', function (event) {
+    // $(document).on('click', '.btnDownloadProtocol', function (event) {
     //     event.preventDefault();
     //     var id = $(this).data("id");
     //
