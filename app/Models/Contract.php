@@ -5,8 +5,8 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Contract extends Model
 {
@@ -28,8 +28,8 @@ class Contract extends Model
         return $this->hasMany(Protocol::class);
     }
 
-    public function folder():HasOne
+    public function folder():BelongsTo
     {
-        return $this->hasOne(Folder::class,'id','folder_id');
+        return $this->belongsTo(Folder::class);
     }
 }
