@@ -74,7 +74,7 @@
                     required: true
                 },
                 other_side_type:{
-                    required: "#checkperson:not(:checked)"
+                    required: true
                 },
                 currency: {
                     required: true
@@ -125,7 +125,6 @@
             unhighlight: function (element, errorClass, validClass) {
                 $(element).removeClass('is-invalid');
             },
-
         });
 
         $('#editContractForm').validate({

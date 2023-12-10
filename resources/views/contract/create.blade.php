@@ -89,23 +89,23 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-6">
+                <div class="row">
+                    <div class="form-group col-6">
                         <input
                             class="otherside-input checkperson"
                             type="checkbox"
-                            name="other_side_type"
-                            id="other_side_type1"
+                            name="other_side_type_check"
+                            id="checkperson"
                             value="Fiziki şəxs"
-                            {{ old('other_side_type') == 'Fiziki şəxs' ? 'checked' : ''}}>
-                        <label class="otherside-label" for="other_side_type1">Fiziki şəxs</label>
+                            {{ old('other_side_type_check') == 'Fiziki şəxs' ? 'checked' : ''}}>
+                        <label class="otherside-label" for="checkperson">Fiziki şəxs</label>
                     </div>
-                    <div class="col-6">
+                    <div class="form-group col-6">
                         <input
                             class="otherside-input textperson"
                             type="text"
                             name="other_side_type"
-                            id="other_side_type2"
+                            id="textperson"
                             placeholder="Şirkət adı"
                             @if(old('other_side_type') == 'Fiziki şəxs')
                                 disabled
@@ -156,7 +156,7 @@
                 <div class="form-group">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
-                        <input class="form-control" type="file" id="file" name="file" accept=".pdf" >
+                        <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                     </div>
                 </div>
             </div>

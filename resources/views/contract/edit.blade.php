@@ -95,23 +95,23 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-6">
+                <div class="row">
+                    <div class="form-group col-6">
                         <input
                             class="otherside-input checkperson"
                             type="checkbox"
-                            name="other_side_type"
-                            id="other_side_type"
+                            name="other_side_type_check"
+                            id="checkperson"
                             value="Fiziki şəxs"
                             {{ $contract->other_side_type=='Fiziki şəxs' ? 'checked' : '' }}>
-                        <label class="otherside-label" for="otherside">Fiziki şəxs</label>
+                        <label class="otherside-label" for="checkperson">Fiziki şəxs</label>
                     </div>
-                    <div class="col-6">
+                    <div class="form-group col-6">
                         <input
                             class="otherside-input textperson"
                             type="text"
                             name="other_side_type"
-                            id="other_side_type"
+                            id="textperson"
                             placeholder="Şirkət adı"
                             @if($contract->other_side_type=='Fiziki şəxs')
                                 disabled
