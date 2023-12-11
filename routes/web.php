@@ -4,15 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\ProtocolController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\ProjectController;
 
 Route::resource('contracts', ContractController::class);
-Route::get('contracts/{contracts}/download',[ContractController::class, 'download'])->name('contracts.download');
+Route::get('contracts/{contracts}/download', [ContractController::class, 'download'])->name('contracts.download');
 
 Route::resource('protocols', ProtocolController::class);
-Route::get('protocols/{id}/download',[ProtocolController::class, 'download'])->name('protocols.download');
+Route::get('protocols/{id}/download', [ProtocolController::class, 'download'])->name('protocols.download');
 
-Route::resource('folders', FolderController::class)->except(['show','update']);
-Route::post('folders/{folder}',[FolderController::class, 'update'])->name('folders.update');//put la yollaya bilmədim hələ ki
+Route::resource('folders', FolderController::class)->except(['show']);
+
+//Route::resource('projects', ProjectController::class)->except(['show', 'update']);
 
 //Route::prefix('folder')->controller(FolderController::class)->group(function (){
 //    Route::get('index','index')->name('folder.index');

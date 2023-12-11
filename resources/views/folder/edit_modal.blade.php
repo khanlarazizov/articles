@@ -9,6 +9,7 @@
             <div class="modal-body">
                 <form method="POST" id="editFolderForm">
                     @csrf
+                    @method('PUT')
 
                     <input type="hidden" name="folder_id" id="folder_id">
 
