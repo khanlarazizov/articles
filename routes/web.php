@@ -19,7 +19,6 @@ Route::resource('companies', CompanyController::class)->except(['show']);
 Route::resource('companies.projects', ProjectController::class);
 //Route::resource('projects.folders', FolderController::class);
 Route::resource('companies.projects.folders', FolderController::class);
-
 //Route::resource('projects.folders', FolderController::class)->except(['show']);
 
 
