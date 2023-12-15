@@ -116,5 +116,5 @@
             </div>
         </form>
     </div>
-    @include('protocol.js')
+    @include('documents.protocol.js')
 @endsection

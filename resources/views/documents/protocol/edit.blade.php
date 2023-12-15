@@ -5,19 +5,20 @@
         <div class="card-header">
             <h3 class="card-title">Protokol Redaktə et</h3>
         </div>
-        <form role="form" action="{{route('protocols.update',$protocol->id)}}" method="post" id="editProtocolForm" enctype="multipart/form-data">
+        <form role="form" action="{{route('protocols.update',$protocol->id)}}" method="post" id="editProtocolForm"
+              enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="card-body">
-{{--                @if($errors->any())--}}
-{{--                    <div>--}}
-{{--                        <ul>--}}
-{{--                            @foreach($errors->all() as $error)--}}
-{{--                                <li style="color: red">{{$error}}</li>--}}
-{{--                            @endforeach--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
+                {{--                @if($errors->any())--}}
+                {{--                    <div>--}}
+                {{--                        <ul>--}}
+                {{--                            @foreach($errors->all() as $error)--}}
+                {{--                                <li style="color: red">{{$error}}</li>--}}
+                {{--                            @endforeach--}}
+                {{--                        </ul>--}}
+                {{--                    </div>--}}
+                {{--                @endif--}}
                 <input type="hidden" name="protocol_id" id="protocol_id" value="{{$protocol->id}}">
 
                 <div class="form-group">
@@ -51,18 +52,18 @@
                            name="other_side_name" value="{{$protocol->other_side_name}}">
                 </div>
 
-{{--                <div class="form-group">--}}
-{{--                    <label>Etiket</label>--}}
-{{--                    <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="tag" id="tag">--}}
-{{--                        <option>Alabama</option>--}}
-{{--                        <option>Alaska</option>--}}
-{{--                        <option>California</option>--}}
-{{--                        <option>Delaware</option>--}}
-{{--                        <option>Tennessee</option>--}}
-{{--                        <option>Texas</option>--}}
-{{--                        <option>Washington</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
+                {{--                <div class="form-group">--}}
+                {{--                    <label>Etiket</label>--}}
+                {{--                    <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;" name="tag" id="tag">--}}
+                {{--                        <option>Alabama</option>--}}
+                {{--                        <option>Alaska</option>--}}
+                {{--                        <option>California</option>--}}
+                {{--                        <option>Delaware</option>--}}
+                {{--                        <option>Tennessee</option>--}}
+                {{--                        <option>Texas</option>--}}
+                {{--                        <option>Washington</option>--}}
+                {{--                    </select>--}}
+                {{--                </div>--}}
 
                 <div class="form-group">
                     <label for="tag">Etiket</label>
@@ -88,11 +89,10 @@
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
                         <embed
-                            src="{{Storage::url('public/documents/protocols/' . $protocol->file)}}"
-                            type="application/pdf"
-                            height="100%"
-                            width="100%"
-                        >
+                                src="{{Storage::url('public/documents/protocols/' . $protocol->file)}}"
+                                type="application/pdf"
+                                height="100%"
+                                width="100%">
                         <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                     </div>
                 </div>
@@ -100,12 +100,14 @@
 
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">
-                    <button class="btn btn-primary btn-lg active w-50 me-2 edit_protocol" type="submit" name="insert" aria-pressed="true">Redaktə et</button>
-                    <a href="{{route('protocols.index')}}" class="btn btn-secondary btn-lg active w-50" role="button" aria-pressed="true">Çıx</a>
+                    <button class="btn btn-primary btn-lg active w-50 me-2 edit_protocol" type="submit" name="insert"
+                            aria-pressed="true">Redaktə et
+                    </button>
+                    <a href="{{route('protocols.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
+                       aria-pressed="true">Çıx</a>
                 </div>
             </div>
         </form>
     </div>
-
-    @include('protocol.js')
+    @include('documents.protocol.js')
 @endsection

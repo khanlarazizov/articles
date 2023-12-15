@@ -52,9 +52,9 @@
                 <tr>
                     <th scope="col">№</th>
                     <th scope="col">Ad</th>
-                    <th scope="col">Bağlı olduğu müqavilə</th>
-                    <th scope="col">Vaxt</th>
-                    <th scope="col">Qiymət</th>
+{{--                    <th scope="col">Bağlı olduğu müqavilə</th>--}}
+{{--                    <th scope="col">Vaxt</th>--}}
+{{--                    <th scope="col">Qiymət</th>--}}
                     <th scope="col">Göstər</th>
                     <th scope="col">Redaktə et</th>
                     <th scope="col">Sil</th>
@@ -66,9 +66,9 @@
                     <tr id="row-{{$key->id}}">
                         <th>{{$loop->iteration}}</th>
                         <td>{{$key->name}}</td>
-                        <td>{{ isset($key->contract->name) ? $key->contract->name : 'Müqaviləsiz' }}</td>
-                        <td>{{$key->date}}</td>
-                        <td>{{$key->price}}</td>
+{{--                        <td>{{ isset($key->contract->name) ? $key->contract->name : 'Müqaviləsiz' }}</td>--}}
+{{--                        <td>{{$key->date}}</td>--}}
+{{--                        <td>{{$key->price}}</td>--}}
 
                         <td>
                             <button type="button" class="btn btnShowProtocol" data-id="{{ $key->id }}"
@@ -95,6 +95,6 @@
         </div>
     </div>
 
-    @include('protocol.js')
-    @include('protocol.show')
+    @include('documents.protocol.js')
+    @include('documents.protocol.show')
 @endsection

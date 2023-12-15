@@ -18,14 +18,14 @@ class ProtocolFactory extends Factory
      */
     public function definition(): array
     {
-        $currency = Protocol::pluck('currency')->toArray();
+        $currency = ['AZN', 'USD'];;
         $contracts = Contract::pluck('id')->toArray();
         return [
-            'name'=> fake()->name,
-            'date'=> fake()->date('Y-m-d'),
-            "contract_id" => fake()->randomElement($contracts),
+            'name' => fake()->name,
+            'date' => fake()->date('Y-m-d'),
+            'contract_id' => fake()->randomElement($contracts),
             'other_side_name' => fake()->name,
-            'price' => rand(100,1000),
+            'price' => rand(100, 1000),
             'currency' => fake()->randomElement($currency),
             'tag' => fake()->word,
             'file' => 'file.pdf',
