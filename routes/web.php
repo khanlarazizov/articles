@@ -5,6 +5,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\ProtocolController;
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\CompanyController;
 
 Route::resource('contracts', ContractController::class);
 Route::get('contracts/{contracts}/download', [ContractController::class, 'download'])->name('contracts.download');
@@ -12,7 +13,19 @@ Route::get('contracts/{contracts}/download', [ContractController::class, 'downlo
 Route::resource('protocols', ProtocolController::class);
 Route::get('protocols/{id}/download', [ProtocolController::class, 'download'])->name('protocols.download');
 
-Route::resource('folders', FolderController::class)->except(['show']);
+Route::resource('companies', CompanyController::class)->except(['show']);
+
+
+Route::resource('companies.projects', ProjectController::class);
+//Route::resource('projects.folders', FolderController::class);
+Route::resource('companies.projects.folders', FolderController::class);
+
+//Route::resource('projects.folders', FolderController::class)->except(['show']);
+
+
+
+
+
 
 //Route::resource('projects', ProjectController::class)->except(['show', 'update']);
 
