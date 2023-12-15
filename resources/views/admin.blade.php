@@ -72,10 +72,22 @@
                     data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('projects.folders.index')}}"--}}
+{{--                           class="nav-link {{Route::is('folders.index') ? 'active' : '' }}">--}}
+{{--                            <p>Qovluq</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('projects.index')}}"--}}
+{{--                           class="nav-link {{Route::is('projects.index') ? 'active' : '' }}">--}}
+{{--                            <p>Layihə</p>--}}
+{{--                        </a>--}}
+{{--                    </li>                    --}}
                     <li class="nav-item">
-                        <a href="{{route('folders.index')}}"
-                           class="nav-link {{Route::is('folders.index') ? 'active' : '' }}">
-                            <p>Qovluq</p>
+                        <a href="{{route('companies.index')}}"
+                           class="nav-link {{Route::is('companies.index') ? 'active' : '' }}">
+                            <p>Şirkət</p>
                         </a>
                     </li>
                     <li class="nav-item menu-is-opening menu-open">
