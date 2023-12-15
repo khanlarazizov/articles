@@ -172,6 +172,5 @@
             </div>
         </form>
     </div>
-
-    @include('contract.js')
+    @include('documents.contract.js')
 @endsection

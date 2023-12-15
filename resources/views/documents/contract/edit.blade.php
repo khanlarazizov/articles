@@ -23,22 +23,22 @@
                 <div class="form-group">
                     <label for="name">Ad</label>
                     <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        id="name"
-                        value="{{ $contract->name }}">
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            id="name"
+                            value="{{ $contract->name }}">
                 </div>
 
                 <div class="form-group">
                     <label for="datapicker">Tarix</label>
                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                         <input
-                            type="text"
-                            class="form-control"
-                            name="date"
-                            id="date"
-                            value="{{ $contract->date }}">
+                                type="text"
+                                class="form-control"
+                                name="date"
+                                id="date"
+                                value="{{ $contract->date }}">
                         <span class="input-group-append">
                         <span class="input-group-text bg-white d-block">
                             <i class="fa fa-calendar"></i></span></span>
@@ -50,7 +50,7 @@
                     <select class="form-select" aria-label="Default select example" name="folder_id">
                         @foreach($folders as $key )
                             <option
-                                value="{{ $key->id }}" {{ $contract->folder_id == $key->id ? "selected" : "" }}>
+                                    value="{{ $key->id }}" {{ $contract->folder_id == $key->id ? "selected" : "" }}>
                                 {{ $key->name }}</option>
                         @endforeach
                     </select>
@@ -70,12 +70,12 @@
                 <div class="row">
                     <div class="form-group col-6 shopping">
                         <input
-                            class="otherside-input"
-                            type="radio"
-                            name="shopping"
-                            id="shopping1"
-                            value="Biz alırıq"
-                            {{ $contract->shopping=='Biz alırıq' ? 'checked' : '' }}>
+                                class="otherside-input"
+                                type="radio"
+                                name="shopping"
+                                id="shopping1"
+                                value="Biz alırıq"
+                                {{ $contract->shopping=='Biz alırıq' ? 'checked' : '' }}>
                         <label class="otherside-label" for="otherside">
                             Biz alırıq
                         </label>
@@ -83,12 +83,12 @@
                     <div class="form-group col-6 shopping">
                         <input
 
-                            class="otherside-input"
-                            type="radio"
-                            name="shopping"
-                            id="shopping1"
-                            value="Biz satırıq"
-                            {{ $contract->shopping=='Biz satırıq' ? 'checked' : '' }}>
+                                class="otherside-input"
+                                type="radio"
+                                name="shopping"
+                                id="shopping1"
+                                value="Biz satırıq"
+                                {{ $contract->shopping=='Biz satırıq' ? 'checked' : '' }}>
                         <label class="otherside-label" for="otherside">
                             Biz satırıq
                         </label>
@@ -98,26 +98,26 @@
                 <div class="row">
                     <div class="form-group col-6">
                         <input
-                            class="otherside-input checkperson"
-                            type="checkbox"
-                            name="other_side_type_check"
-                            id="checkperson"
-                            value="Fiziki şəxs"
-                            {{ $contract->other_side_type=='Fiziki şəxs' ? 'checked' : '' }}>
+                                class="otherside-input checkperson"
+                                type="checkbox"
+                                name="other_side_type_check"
+                                id="checkperson"
+                                value="Fiziki şəxs"
+                                {{ $contract->other_side_type=='Fiziki şəxs' ? 'checked' : '' }}>
                         <label class="otherside-label" for="checkperson">Fiziki şəxs</label>
                     </div>
                     <div class="form-group col-6">
                         <input
-                            class="otherside-input textperson"
-                            type="text"
-                            name="other_side_type"
-                            id="textperson"
-                            placeholder="Şirkət adı"
-                            @if($contract->other_side_type=='Fiziki şəxs')
-                                disabled
-                            @else
-                                value="{{ $contract->other_side_type }}"
-                            @endif
+                                class="otherside-input textperson"
+                                type="text"
+                                name="other_side_type"
+                                id="textperson"
+                                placeholder="Şirkət adı"
+                                @if($contract->other_side_type=='Fiziki şəxs')
+                                    disabled
+                                @else
+                                    value="{{ $contract->other_side_type }}"
+                                @endif
                         >
                     </div>
                 </div>
@@ -125,34 +125,34 @@
                 <div class="form-group">
                     <label for="other_side_name">Təmsilçi</label>
                     <input
-                        type="text"
-                        class="form-control"
-                        aria-label="First name"
-                        id="other_side_name"
-                        name="other_side_name"
-                        value="{{ $contract->other_side_name }}">
+                            type="text"
+                            class="form-control"
+                            aria-label="First name"
+                            id="other_side_name"
+                            name="other_side_name"
+                            value="{{ $contract->other_side_name }}">
                 </div>
 
                 <div class="form-group">
                     <label for="tag">Etiket</label>
                     <input
-                        type="text"
-                        class="form-control"
-                        aria-label="First name"
-                        id="tag"
-                        name="tag"
-                        value="{{ $contract->tag }}">
+                            type="text"
+                            class="form-control"
+                            aria-label="First name"
+                            id="tag"
+                            name="tag"
+                            value="{{ $contract->tag }}">
                 </div>
 
                 <div class="form-group">
                     <label for="price">Dəyər</label>
                     <input
-                        type="text"
-                        class="form-control"
-                        aria-label="First name"
-                        id="price"
-                        name="price"
-                        value="{{ $contract->price }}">
+                            type="text"
+                            class="form-control"
+                            aria-label="First name"
+                            id="price"
+                            name="price"
+                            value="{{ $contract->price }}">
                 </div>
 
                 <div class="form-group">
@@ -167,10 +167,10 @@
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Fayl seç</label>
                         <embed
-                            src="{{Storage::url('public/documents/contracts/' . $contract->file)}}"
-                            type="application/pdf"
-                            height="100%"
-                            width="100%"
+                                src="{{Storage::url('public/documents/contracts/' . $contract->file)}}"
+                                type="application/pdf"
+                                height="100%"
+                                width="100%"
                         >
                         <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                     </div>
@@ -188,5 +188,5 @@
             </div>
         </form>
     </div>
-    @include('contract.js')
+    @include('documents.contract.js')
 @endsection
