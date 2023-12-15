@@ -25,7 +25,7 @@
         }
     });
 
-    $(document).on('click', '.add_folder', function (e) {
+    $(document).on('click', '.btnFolderStore', function (e) {
         e.preventDefault();
         $('.error-message').html('');
         let formData = new FormData(document.getElementById('addFolderForm'));
@@ -48,12 +48,13 @@
             },
             error: function (error) {
                 $('#nameError').html(error.responseJSON.errors.name);
+                $('#nameError').html(error.responseJSON.errors.name);
             }
 
         });
     });
 
-    $(document).on('click', '.edit_folder', function (e) {
+    $(document).on('click', '.btnFolderEdit', function (e) {
         e.preventDefault();
         $('.error-message').html('');
         let folder_id = $(this).data('id');
@@ -66,11 +67,15 @@
             success: function (response) {
                 $('#folder_id').val(folder_id);
                 $('#edit_folder_name').val(response.name);
+                $('#edit_project_id').val(response.project_id);
+            },
+            error: function (response) {
+
             }
         });
     });
 
-    $(document).on('click', '.update_folder', function (e) {
+    $(document).on('click', '.btnFolderUpdate', function (e) {
         e.preventDefault();
 
         let folder_id = $('#folder_id').val();
@@ -95,11 +100,13 @@
             },
             error: function (error) {
                 $('#folderNameError').html(error.responseJSON.errors.name);
+                $('#folderProjectIDError').html(error.responseJSON.errors.project_id);
+
             }
         });
     });
 
-    $(document).on('click', '.delete_folder', function (e) {
+    $(document).on('click', '.btnFolderDelete', function (e) {
         e.preventDefault();
         let folder_id = $(this).data('id');
         Swal.fire({
@@ -120,7 +127,7 @@
                         $("#row-" + folder_id).remove();
                         Swal.fire(
                             'Silindi!',
-                            'Müqavilə silindi.',
+                            'Qovluq silindi.',
                             'success'
                         );
                     }

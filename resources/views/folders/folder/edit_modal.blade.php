@@ -18,11 +18,21 @@
                         <input type="text" class="form-control" name="name" id="edit_folder_name">
                         <span id="folderNameError" class="text-danger error-message"></span>
                     </div>
+
+{{--                    <div class="form-group">--}}
+{{--                        <label for="edit_project_id">Bağlı olduğu Proyekt</label>--}}
+{{--                        <select class="form-control" aria-label="Default select example" name="project_id" id="edit_project_id">--}}
+{{--                            @foreach($projects as $key )--}}
+{{--                                <option value="{{$key->id}}">{{$key->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                        <span id="folderProjectIDError" class="text-danger error-message"></span>--}}
+{{--                    </div>--}}
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary update_folder">Save change</button>
+                <button type="button" class="btn btn-primary btnFolderUpdate">Save change</button>
             </div>
         </div>
     </div>

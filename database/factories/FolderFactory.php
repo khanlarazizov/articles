@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,11 @@ class FolderFactory extends Factory
      */
     public function definition(): array
     {
+        $project = Project::pluck('id')->toArray();
+
         return [
-            'name' => fake()->name()
+            'name' => fake()->name(),
+            'project_id' => fake()->randomElement($project)
         ];
     }
 }
