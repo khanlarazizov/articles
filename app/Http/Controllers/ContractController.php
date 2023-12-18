@@ -6,11 +6,13 @@ use App\Http\Requests\Contracts\StoreContractRequest;
 use App\Http\Requests\Contracts\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Folder;
-use Carbon\Carbon;
+use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
+    use FileUploadTrait;
+
     public function index()
     {
         $contracts = Contract::query()
@@ -27,27 +29,13 @@ class ContractController extends Controller
 
     public function store(StoreContractRequest $request)
     {
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents/contracts', $fileName);
-        }
-
         $other_type = $request->other_side_type_check == 'Fiziki şəxs' ? 'Fiziki şəxs' : $request->other_side_type;
 
-        Contract::create([
-            'name' => $request->name,
-            'date' => Carbon::parse($request->date)->format('Y-m-d'),
-            'folder_id' => $request->folder_id,
-            'type' => $request->type,
-            'shopping' => $request->shopping,
-            'other_side_type' => $other_type,
-            'other_side_name' => $request->other_side_name,
-            'price' => $request->price,
-            'tag' => $request->tag,
-            'currency' => $request->currency,
-            'file' => $fileName
-        ]);
+        $insert = $request->validated();
+        $insert['other_side_type'] = $other_type;
+        $insert['file'] = $this->storeFile($request, 'file', 'contracts');
+
+        Contract::create($insert);
 
         $notification = array(
             'message' => $request->name . " adlı müqavilə siyahıya uğurla əlavə edildi",
@@ -73,31 +61,12 @@ class ContractController extends Controller
     {
         $other_type = $request->other_side_type_check == 'Fiziki şəxs' ? 'Fiziki şəxs' : $request->other_side_type;
 
-        $fileName = '';
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents/contracts', $fileName);
-            if ($contract->file) {
-                Storage::delete('public/documents/contracts/' . $contract->file);
-            }
-        } else {
-            $fileName = $contract->file;
-        }
+        $insert = $request->validated();
+        $insert['other_side_type'] = $other_type;
+        $insert['file'] = $this->updateFile($request, 'file', $contract, 'contracts');
 
-        $contract->update([
-            'name' => $request->name,
-            'date' => Carbon::parse($request->date)->format('Y-m-d'),
-            'folder_id' => $request->folder_id,
-            'type' => $request->type,
-            'shopping' => $request->shopping,
-            'other_side_type' => $other_type,
-            'other_side_name' => $request->other_side_name,
-            'price' => $request->price,
-            'tag' => $request->tag,
-            'currency' => $request->currency,
-            'file' => $fileName
-        ]);
+        $contract->update($insert);
+
 
         $notification = array(
             'message' => $request->name . " adlı müqavilə uğurla redaktə edildi",

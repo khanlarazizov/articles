@@ -6,12 +6,14 @@ use App\Http\Requests\Protocols\StoreProtocolRequest;
 use App\Http\Requests\Protocols\UpdateProtocolRequest;
 use App\Models\Contract;
 use App\Models\Protocol;
+use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class ProtocolController extends Controller
 {
+    use FileUploadTrait;
+
     public function index(Request $request)
     {
         $contracts = Contract::all();
@@ -32,22 +34,11 @@ class ProtocolController extends Controller
 
     public function store(StoreProtocolRequest $request)
     {
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents/protocols', $fileName);
-        }
+        $insert = $request->validated();
+        $insert['file'] = $this->storeFile($request, 'file', 'protocols');
 
-        Protocol::create([
-            'name' => $request->name,
-            'date' => Carbon::parse($request->date)->format('Y-m-d'),
-            'contract_id' => $request->contract_id,
-            'other_side_name' => $request->other_side_name,
-            'price' => $request->price,
-            'currency' => $request->currency,
-            'tag' => $request->tag,
-            'file' => $fileName
-        ]);
+        Protocol::create($insert);
+
 
         $notification = array(
             'message' => $request->name . " adlı protokol siyahıya uğurla əlavə edildi",
@@ -63,7 +54,6 @@ class ProtocolController extends Controller
         return response()->json($protocol);
     }
 
-
     public function edit(Protocol $protocol)
     {
         $contracts = Contract::all();
@@ -72,28 +62,9 @@ class ProtocolController extends Controller
 
     public function update(UpdateProtocolRequest $request, Protocol $protocol)
     {
-        $fileName = '';
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/documents/protocols', $fileName);
-            if ($protocol->file) {
-                Storage::delete('public/documents/protocols/' . $protocol->file);
-            }
-        } else {
-            $fileName = $protocol->file;
-        }
-
-        $protocol->update([
-            'name' => $request->name,
-            'date' => Carbon::parse($request->date)->format('Y-m-d'),
-            'contract_id' => $request->contract_id,
-            'other_side_name' => $request->other_side_name,
-            'price' => $request->price,
-            'currency' => $request->currency,
-            'tag' => $request->tag,
-            'file' => $fileName
-        ]);
+        $insert = $request->validated();
+        $insert['file'] = $this->updateFile($request, 'file', $protocol, 'protocols');
+        $protocol->update($insert);
 
         $notification = array(
             'message' => $request->name . " adlı protokol uğurla redaktə edildi",
