@@ -26,6 +26,7 @@ class UpdateProtocolRequest extends FormRequest
             'date' => 'required',
             'other_side_name' => 'required',
             'price' => 'required',
+            'contract_id' => 'required',
             'tag' => 'required',
             'currency' => 'required',
             'file' => 'mimes:pdf'
@@ -39,6 +40,7 @@ class UpdateProtocolRequest extends FormRequest
             'date.required' => 'Tarix daxil edin',
             'other_side_name.required' => 'Təmsilçini daxil edin',
             'price.required' => 'Dəyər daxil edin',
+            'contract_id.required' => 'Müqavilə daxil edin',
             'tag.required' => 'Etiket daxil edin',
             'currency.required' => 'Ad daxil edin',
             'file.mimes' => 'Fayl pdf olmalıdır'

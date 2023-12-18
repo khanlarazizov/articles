@@ -27,7 +27,7 @@ class UpdateContractRequest extends FormRequest
             'folder_id' => 'required',
             'type' => 'required',
             'shopping' => 'required',
-            'other_side_type' => 'required_unless:other_side_type_check, Fiziki şəxs',
+            'other_side_type' => 'required_unless:other_side_type_check,Fiziki şəxs',
             'other_side_name' => 'required',
             'price' => 'required',
             'tag' => 'required',
@@ -48,7 +48,7 @@ class UpdateContractRequest extends FormRequest
             'other_side_name.required' => 'Təmsilçini daxil edin',
             'price.required' => 'Dəyər daxil edin',
             'tag.required' => 'Etiket daxil edin',
-            'currency.required' => 'Ad daxil edin',
+            'currency.required' => 'Valyuta daxil edin',
             'file.mimes' => 'Fayl pdf olmalıdır'
         ];
     }

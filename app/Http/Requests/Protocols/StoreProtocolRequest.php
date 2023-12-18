@@ -25,6 +25,8 @@ class StoreProtocolRequest extends FormRequest
             'name' => 'required',
             'date' => 'required',
             'other_side_name' => 'required',
+            'contract_id' => 'required',
+            'currency' => 'required',
             'price' => 'required',
             'tag' => 'required',
             'file' => 'required|mimes:pdf'
@@ -37,6 +39,8 @@ class StoreProtocolRequest extends FormRequest
             'name.required' => 'Ad daxil edin',
             'date.required' => 'Tarix daxil edin',
             'other_side_name.required' => 'Təmsilçini daxil edin',
+            'contract_id.required' => 'Müqavilə daxil edin',
+            'currency.required' => 'Valyuta daxil edin',
             'price.required' => 'Dəyər daxil edin',
             'tag.required' => 'Etiket daxil edin',
             'file.required' => 'Fayl daxil edin'
