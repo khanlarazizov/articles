@@ -6,11 +6,14 @@ use App\Http\Requests\Protocols\StoreProtocolRequest;
 use App\Http\Requests\Protocols\UpdateProtocolRequest;
 use App\Models\Contract;
 use App\Models\Protocol;
+use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProtocolController extends Controller
 {
+    use FileUploadTrait;
+
     public function index(Request $request)
     {
         $contracts = Contract::all();
