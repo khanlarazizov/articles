@@ -6,17 +6,13 @@ use App\Http\Requests\Contracts\StoreContractRequest;
 use App\Http\Requests\Contracts\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Folder;
-use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
-    use FileUploadTrait;
-
     public function index()
     {
-        $contracts = Contract::query()
-            ->with('protocols:id,name')
+        $contracts = Contract::with('protocols:id,name')->select(['id','name'])
             ->paginate(5);
         return view('documents.contract.index', compact('contracts'));
     }
