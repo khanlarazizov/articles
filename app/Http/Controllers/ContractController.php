@@ -6,13 +6,16 @@ use App\Http\Requests\Contracts\StoreContractRequest;
 use App\Http\Requests\Contracts\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Folder;
+use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
+    use FileUploadTrait;
+
     public function index()
     {
-        $contracts = Contract::with('protocols:id,name')->select(['id','name'])
+        $contracts = Contract::with('protocols:id,name')->select(['id', 'name'])
             ->paginate(5);
         return view('documents.contract.index', compact('contracts'));
     }
@@ -79,9 +82,8 @@ class ContractController extends Controller
         }
     }
 
-    public function download(string $id)
+    public function download(Contract $contract)
     {
-        $contract = Contract::find($id);
         return Storage::download('public/documents/contracts/' . $contract->file);
     }
 }
