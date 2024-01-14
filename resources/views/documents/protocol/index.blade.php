@@ -38,9 +38,9 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-6 mx-auto d-flex">
-                <button type="submit" class="btn btn-primary w-50 me-2">Axtar</button>
-                <button type="submit" class="btn btn-danger w-50 btnClearFilter">Təmizlə</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-50 ">Axtar</button>
+{{--                <button type="submit" class="btn btn-danger w-50 btnClearFilter">Təmizlə</button>--}}
             </div>
         </div>
         <hr>

@@ -66,7 +66,6 @@ class ContractController extends Controller
 
         $contract->update($insert);
 
-
         $notification = array(
             'message' => $request->name . " adlı müqavilə uğurla redaktə edildi",
             'alert-type' => 'success'

@@ -5,17 +5,11 @@
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="{{asset('plugins/amsify/jquery.amsify.suggestags.js')}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script>
@@ -43,11 +37,12 @@
                     $("#addFolderForm").trigger('reset');
 
                     $(".table_content").load(location.href + " .table_content");
+
+                    toastr.success('Uğurlu!');
                 }
 
             },
             error: function (error) {
-                $('#nameError').html(error.responseJSON.errors.name);
                 $('#nameError').html(error.responseJSON.errors.name);
             }
 
@@ -56,7 +51,6 @@
 
     $(document).on('click', '.btnFolderEdit', function (e) {
         e.preventDefault();
-        $('.error-message').html('');
         let folder_id = $(this).data('id');
 
         $('#editFolderModal').modal('show');
@@ -66,11 +60,11 @@
             url: "folders/" + folder_id + "/edit",
             success: function (response) {
                 $('#folder_id').val(folder_id);
-                $('#edit_folder_name').val(response.name);
+                $('#edit_name').val(response.name);
                 $('#edit_project_id').val(response.project_id);
             },
             error: function (response) {
-
+                console.log(response)
             }
         });
     });
@@ -79,10 +73,11 @@
         e.preventDefault();
 
         let folder_id = $('#folder_id').val();
+        $('.error-message').html('');
         let formData = new FormData(document.getElementById('editFolderForm'));
 
         $.ajax({
-            method: "POST",
+            type: "POST",
             url: "folders/" + folder_id,
             data: formData,
             // cache: false,
@@ -96,6 +91,8 @@
                     $("#editFolderForm").trigger('reset');
 
                     $(".table_content").load(location.href + " .table_content");
+
+                    toastr.success('Uğurlu!');
                 }
             },
             error: function (error) {
@@ -125,11 +122,7 @@
                     async: false,
                     success: function (response) {
                         $("#row-" + folder_id).remove();
-                        Swal.fire(
-                            'Silindi!',
-                            'Qovluq silindi.',
-                            'success'
-                        );
+                        toastr.success('Uğurlu!');
                     }
                 });
             }
