@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Protocols\StoreProtocolRequest;
 use App\Http\Requests\Protocols\UpdateProtocolRequest;
+use App\Interfaces\IContract;
+use App\Interfaces\IProtocol;
 use App\Models\Contract;
 use App\Models\Protocol;
 use App\Traits\FileUploadTrait;
@@ -14,10 +16,20 @@ class ProtocolController extends Controller
 {
     use FileUploadTrait;
 
+    public $protocol;
+    public $contract;
+
+    public function __construct(IProtocol $protocol, IContract $contract)
+    {
+        $this->protocol = $protocol;
+        $this->contract = $contract;
+    }
+
     public function index(Request $request)
     {
-        $contracts = Contract::all();
-        $protocols = Protocol::query()->with("contract:id,name")
+        $contracts = $this->contract->getAllContracts()->get();
+
+        $protocols = $this->protocol->getAllProtols()
             ->name($request->name)
             ->contract($request->contract_id)
             ->date($request->date)
@@ -28,7 +40,8 @@ class ProtocolController extends Controller
 
     public function create()
     {
-        $contracts = Contract::select(['id', 'name'])->get();
+        $contracts = $this->contract->getContractWithAttributes();
+
         return view('documents.protocol.create', compact('contracts'));
     }
 
@@ -37,8 +50,7 @@ class ProtocolController extends Controller
         $insert = $request->validated();
         $insert['file'] = $this->storeFile($request, 'file', 'protocols');
 
-        Protocol::create($insert);
-
+        $this->protocol->createProtocol($insert);
 
         $notification = array(
             'message' => $request->name . " adlı protokol siyahıya uğurla əlavə edildi",
@@ -48,23 +60,28 @@ class ProtocolController extends Controller
         return redirect()->route('protocols.index')->with($notification);
     }
 
-    public function show(Protocol $protocol)
+    public function show($id)
     {
-        $protocol = Protocol::with('contract:id,name')->find($protocol->id);
+        $protocol = $this->protocol->getProtocolById($id)->load('contract:id,name');
         return response()->json($protocol);
     }
 
-    public function edit(Protocol $protocol)
+    public function edit($id)
     {
-        $contracts = Contract::select(['id', 'name'])->get();
+        $contracts = $this->contract->getContractWithAttributes();
+        $protocol = $this->protocol->getProtocolById($id);
+//        dd($protocol);
         return view('documents.protocol.edit', compact('protocol', 'contracts'));
     }
 
-    public function update(UpdateProtocolRequest $request, Protocol $protocol)
+    public function update(UpdateProtocolRequest $request, $id)
     {
+        $protocol = $this->protocol->getProtocolById($id);
+
         $insert = $request->validated();
         $insert['file'] = $this->updateFile($request, 'file', $protocol, 'protocols');
-        $protocol->update($insert);
+
+        $this->protocol->updateProtocol($id, $insert);
 
         $notification = array(
             'message' => $request->name . " adlı protokol uğurla redaktə edildi",
@@ -74,15 +91,8 @@ class ProtocolController extends Controller
         return redirect()->route('protocols.index')->with($notification);
     }
 
-    public function destroy(Protocol $protocol)
+    public function destroy($id)
     {
-        if (Storage::delete('public/documents/protocols/' . $protocol->file)) {
-            $protocol->delete();
-        }
-    }
-
-    public function download(Protocol $protocol)
-    {
-        return Storage::download('public/documents/protocols/' . $protocol->file);
+        $this->protocol->deleteProtocol($id);
     }
 }

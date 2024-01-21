@@ -4,61 +4,59 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Folders\StoreFolderRequest;
 use App\Http\Requests\Folders\UpdateFolderRequest;
-use App\Models\Company;
-use App\Models\Contract;
-use App\Models\Folder;
-use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Interfaces\ICompany;
+use App\Interfaces\IFolder;
+use App\Interfaces\IProject;
 
 class FolderController extends Controller
 {
-    public function index(Company $company, Project $project)
+    public $folder;
+    public $project;
+    public $company;
+
+    public function __construct(IFolder $folder, IProject $project, ICompany $company)
     {
-        $projects = Project::all();
-
-        $folders = $project->folders()
-            ->with('project:id,name')
-            ->paginate(5);
-
-        return view('folders.folder.index', compact('folders', 'project', 'projects'));
+        $this->folder = $folder;
+        $this->project = $project;
+        $this->company = $company;
     }
 
-    public function store(StoreFolderRequest $request, Company $company, Project $project)
+    public function index($companyId, $projectId)
     {
-        $project->folders()->create($request->validated());
+        $company = $this->company->getCompanyById($companyId);
+        $project = $this->project->getProjectById($companyId, $projectId);
+        $folders = $this->folder->getAllFolders($companyId, $projectId)->paginate(5);
+
+        return view('folders.folder.index', compact('folders', 'company', 'project'));
+    }
+
+    public function store($companyId, $projectId, StoreFolderRequest $request)
+    {
+        $this->folder->createFolder($projectId, $request->validated());
 
         return response()->json([
-            'status' => 'success',
+            'status' => 'success'
         ]);
     }
 
-    public function edit(Company $company, Project $project, Folder $folder)
+    public function edit($companyId, $projectId, $id)
     {
+        $folder = $this->folder->getFolderById($id);
+
         return response()->json($folder);
     }
 
-
-    public function update(Company $company, Project $project, UpdateFolderRequest $request, Folder $folder)
+    public function update($companyId, $projectId, $id, UpdateFolderRequest $request)
     {
-
-        $folder->update($request->validated());
+        $this->folder->updateFolder($id, $request->validated());
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Uğurlu'
+            'status' => 'success'
         ]);
     }
 
-    public function destroy(Company $company, Project $project, Folder $folder)
+    public function destroy($companyId, $projectId, $id)
     {
-        $folder->delete();
+        $this->folder->deleteFolder($id);
     }
-
-//    public function folder($id)
-//    {
-//        $contracts = Contract::with('protocols')->get();
-//        $folder = Folder::with('contracts')->where('id', $id)->first();
-//
-//        return view('documents.contract.index', compact('folder'));
-//    }
 }

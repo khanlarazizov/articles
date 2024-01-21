@@ -4,47 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Companies\StoreCompanyRequest;
 use App\Http\Requests\Companies\UpdateCompanyRequest;
-use App\Models\Company;
-use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Interfaces\ICompany;
 
 class CompanyController extends Controller
 {
+    public $company;
+
+    public function __construct(ICompany $company)
+    {
+        $this->company = $company;
+    }
+
     public function index()
     {
-        $projects = Project::all();
-        $companies = Company::with('projects')
-            ->select('id', 'name')
-            ->paginate(5);
+        $companies = $this->company->getAllCompanies()->select('id', 'slug', 'name')->paginate(5);;
 
-        return view('folders.company.index', compact('companies', 'projects'));
+        return view('folders.company.index', compact('companies'));
     }
 
     public function store(StoreCompanyRequest $request)
     {
-        Company::create($request->validated());
+        $this->company->createCompany($request->validated());
 
         return response()->json([
             'status' => 'success'
         ]);
     }
 
-    public function edit(Company $company)
+    public function edit($id)
     {
+        $company = $this->company->getCompanyById($id);
         return response()->json($company);
     }
 
-    public function update(UpdateCompanyRequest $request, Company $company)
+    public function update($id, UpdateCompanyRequest $request)
     {
-        $company->update($request->validated());
+        $this->company->updateCompany($id, $request->validated());
 
         return response()->json([
             'status' => 'success'
         ]);
     }
 
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        $company->delete();
+        $this->company->deleteCompany($id);
     }
+
 }
