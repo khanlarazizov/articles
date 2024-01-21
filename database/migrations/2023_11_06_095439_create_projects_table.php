@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->unsignedBigInteger('company_id');
             $table->timestamps();
+            $table->softDeletes();
+
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('tag');
             $table->string('file');
             $table->timestamps();
+            $table->softDeletes();
+
 
             $table->foreign("contract_id")->references("id")->on("contracts")->onDelete('cascade');
         });
