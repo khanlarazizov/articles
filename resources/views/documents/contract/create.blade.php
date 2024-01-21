@@ -1,5 +1,19 @@
 @extends('admin')
 @section('title','Müqavilələr')
+@section('content-header')
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Müqavilələr</h1>
+            </div>
+        </div>
+        <div class="row ms-1">
+            <ol class="breadcrumb">
+                {{ Breadcrumbs::render('contract') }}
+            </ol>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
@@ -163,9 +177,7 @@
 
             <div class="card-footer">
                 <div class="col-6 mx-auto d-flex">
-                    <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda
-                        saxla
-                    </button>
+                    <button class="btn btn-primary btn-lg active w-50 me-2" type="submit" aria-pressed="true">Yadda saxla</button>
                     <a href="{{route('contracts.index')}}" class="btn btn-secondary btn-lg active w-50" role="button"
                        aria-pressed="true">Çıx</a>
                 </div>

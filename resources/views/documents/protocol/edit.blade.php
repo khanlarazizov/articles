@@ -1,5 +1,19 @@
 @extends('admin')
 @section('title','Protokollar')
+@section('content-header')
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Protokollar</h1>
+            </div>
+        </div>
+        <div class="row ms-1">
+            <ol class="breadcrumb">
+                {{ Breadcrumbs::render('protocol-edit',$protocol) }}
+            </ol>
+        </div>
+    </div>
+@endsection
 @section('content')
     <div class="card card-primary">
         <div class="card-header">
@@ -40,7 +54,8 @@
                     <label for="other_side_name">Müqavilə</label>
                     <select class="form-select" aria-label="Default select example" name="contract_id">
                         @foreach($contracts as $key )
-                            <option value="{{$key->id}}" {{$protocol->contract_id == $key->id ? "selected" : "" }}>{{$key->name}}</option>
+                            <option
+                                value="{{$key->id}}" {{$protocol->contract_id == $key->id ? "selected" : "" }}>{{$key->name}}</option>
                         @endforeach
                     </select>
 
@@ -87,12 +102,11 @@
 
                 <div class="form-group">
                     <div class="mb-3">
-                        <label for="formFile" class="form-label">Fayl seç</label>
-                        <embed
-                                src="{{Storage::url('public/documents/protocols/' . $protocol->file)}}"
-                                type="application/pdf"
-                                height="100%"
-                                width="100%">
+                        <label for="formFile" class="form-label">Fayl seç</label><br>
+                        <span>{{$protocol->file}}</span>
+                        <a href="{{Storage::url('public/documents/protocols/' . $protocol->file)}}"
+                           class="btn" download><i class="fa-solid fa-download"></i></a></td>
+
                         <input class="form-control" type="file" id="file" name="file" accept=".pdf">
                     </div>
                 </div>
