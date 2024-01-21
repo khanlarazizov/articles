@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Folder extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
@@ -31,5 +34,10 @@ class Folder extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function company(): HasOneThrough
+    {
+        return $this->hasOneThrough(Company::class, Project::class);
     }
 }
