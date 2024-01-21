@@ -179,6 +179,7 @@
             type: 'get',
             success: function (response) {
                 $('#protocol_id').text(response.id);
+                $('#protocol_title').text(response.name);
                 $('#protocol_name').text(response.name);
                 $('#protocol_date').text(response.date);
                 $('#protocol_contract_id').text(response.contract.name);

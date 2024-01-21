@@ -211,7 +211,7 @@
                 url: 'contracts/' + id,
                 type: 'get',
                 success: function (response) {
-                    $('#contract_id').text(response.id)
+                    $('#contract_title').text(response.name)
                     $('#contract_name').text(response.name)
                     $('#contract_date').text(response.date)
                     $('#contract_folder_id').text(response.folder.name)
