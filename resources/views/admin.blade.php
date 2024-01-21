@@ -73,6 +73,12 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
+                        <a href="{{route('home')}}"
+                           class="nav-link {{Route::is('home') ? 'active' : '' }}">
+                            <p>Ana səhifə</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{route('companies.index')}}"
                            class="nav-link {{Route::is('companies.index') ? 'active' : '' }}">
                             <p>Şirkət</p>
@@ -122,10 +128,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
-                <div class="card-body">
-                    @yield('content')
-                </div>
+            @yield('content')
 
             </div><!-- /.container-fluid -->
         </section>
