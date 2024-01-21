@@ -4,71 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Http\Requests\Projects\UpdateProjectRequest;
-use App\Models\Company;
-use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Interfaces\ICompany;
+use App\Interfaces\IProject;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Company $company)
-    {
-        $companies = Company::all();
 
-        $projects = $company->projects()->with('company')->get();
-//        dd($projects);
-//        $project = Project::with('project')->get();
-//        paginate(5);
-        return view('folders.project.index', compact('projects', 'companies'));
+    public $project;
+    public $company;
+
+    public function __construct(IProject $project, ICompany $company)
+    {
+        $this->project = $project;
+        $this->company = $company;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreProjectRequest $request, Company $company)
+    public function index($companyId)
     {
-        $company->projects()->create($request->validated());
+        $company = $this->company->getCompanyById($companyId);
+        $projects = $this->project->getAllProject($companyId)->paginate(5);
 
-        return response()->json([
-            'status' => 'success'
-        ]);
+        return view('folders.project.index', compact('projects', 'company'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Project $project)
+    public function edit($companyId, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Company $company,Project $project)
-    {
+        $project = $this->project->getProjectById($companyId, $id);
         return response()->json($project);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Company $company,UpdateProjectRequest $request, Project $project)
+    public function store($companyId, StoreProjectRequest $request)
     {
-        $project->update($request->validated());
+        $this->project->createProject($companyId, $request->validated());
 
         return response()->json([
             'status' => 'success'
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Company $company,Project $project)
+    public function update($companyId, UpdateProjectRequest $request, $id)
     {
-        $project->delete();
+        $this->project->updateProject($companyId, $request->validated(), $id);
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
+    public function destroy($companyId, $id)
+    {
+        $this->project->deleteProject($companyId, $id);
     }
 }
