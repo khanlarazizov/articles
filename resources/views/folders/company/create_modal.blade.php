@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Layihə əlavə et</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Şirkət əlavə et</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -17,8 +17,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btnCompanyStore">Save change</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıx</button>
+                <button type="button" class="btn btn-primary btnCompanyStore">Yadda saxla</button>
             </div>
         </div>
     </div>

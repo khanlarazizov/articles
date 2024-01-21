@@ -11,7 +11,7 @@
                     @csrf
                     @method('PUT')
 
-                    <input type="text" name="company_id" id="company_id">
+                    <input type="hidden" name="company_id" id="company_id">
 
                     <div class="form-group">
                         <label for="edit_name">Ad</label>
@@ -21,8 +21,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btnCompanyUpdate">Save change</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Çıx</button>
+                <button type="button" class="btn btn-primary btnCompanyUpdate">Yadda saxla</button>
             </div>
         </div>
     </div>
