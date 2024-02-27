@@ -40,4 +40,9 @@ class Folder extends Model
     {
         return $this->hasOneThrough(Company::class, Project::class);
     }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
 }
