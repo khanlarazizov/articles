@@ -214,6 +214,14 @@
                             <p>Ana səhifə</p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('documents.index')}}"
+                           class="nav-link {{Route::is('documents.index') ? 'active' : '' }}">
+                            <p>Sənədlər</p>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a href="{{route('companies.index')}}"
                            class="nav-link {{Route::is('companies.index') ? 'active' : '' }}">
