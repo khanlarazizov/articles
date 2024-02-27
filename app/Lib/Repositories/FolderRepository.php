@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Lib\Repositories;
 
-use App\Interfaces\IFolder;
-
-use App\Models\Company;
-use App\Models\Project;
+use App\Lib\Repositories\Interfaces\IFolderRepository;
 use App\Models\Folder;
+use App\Models\Project;
 
-class FolderRepository implements IFolder
+class FolderRepository implements IFolderRepository
 {
     public function getAllFolders($companyId, $projectId)
     {

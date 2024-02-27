@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Protocols\StoreProtocolRequest;
 use App\Http\Requests\Protocols\UpdateProtocolRequest;
-use App\Interfaces\IContract;
-use App\Interfaces\IProtocol;
-use App\Models\Contract;
-use App\Models\Protocol;
+use App\Lib\Repositories\Interfaces\IContractRepository;
+use App\Lib\Repositories\Interfaces\IProtocolRepository;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProtocolController extends Controller
 {
@@ -19,7 +16,7 @@ class ProtocolController extends Controller
     public $protocol;
     public $contract;
 
-    public function __construct(IProtocol $protocol, IContract $contract)
+    public function __construct(IProtocolRepository $protocol, IContractRepository $contract)
     {
         $this->protocol = $protocol;
         $this->contract = $contract;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Lib\Repositories\Interfaces;
 
-interface IFolder
+interface IFolderRepository
 {
     public function getAllFolders($companyId, $projectId);
 

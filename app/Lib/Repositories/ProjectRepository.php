@@ -1,18 +1,24 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Lib\Repositories;
 
-use App\Interfaces\IProject;
-use App\Models\Project;
+use App\Lib\Exceptions\ModelNotFoundException;
+use App\Lib\Repositories\Interfaces\IProjectRepository;
 use App\Models\Company;
+use App\Models\Project;
 
-class ProjectRepository implements IProject
+class ProjectRepository implements IProjectRepository
 {
 
     public function getAllProject($companyId)
     {
         $company = Company::find($companyId);
+        if($company == null)
+            throw new ModelNotFoundException("Not Found");
+
         $projects = $company->projects();
+
+
 
         return $projects;
     }

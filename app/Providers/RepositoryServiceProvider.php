@@ -2,16 +2,16 @@
 
 namespace App\Providers;
 
-use App\Interfaces\ICompany;
-use App\Interfaces\IContract;
-use App\Interfaces\IFolder;
-use App\Interfaces\IProject;
-use App\Interfaces\IProtocol;
-use App\Repositories\CompanyRepository;
-use App\Repositories\ContractRepository;
-use App\Repositories\FolderRepository;
-use App\Repositories\ProjectRepository;
-use App\Repositories\ProtocolRepository;
+use App\Lib\Repositories\CompanyRepository;
+use App\Lib\Repositories\ContractRepository;
+use App\Lib\Repositories\FolderRepository;
+use App\Lib\Repositories\Interfaces\ICompanyRepository;
+use App\Lib\Repositories\Interfaces\IContractRepository;
+use App\Lib\Repositories\Interfaces\IFolderRepository;
+use App\Lib\Repositories\Interfaces\IProjectRepository;
+use App\Lib\Repositories\Interfaces\IProtocolRepository;
+use App\Lib\Repositories\ProjectRepository;
+use App\Lib\Repositories\ProtocolRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -21,11 +21,11 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ICompany::class,CompanyRepository::class);
-        $this->app->bind(IProject::class,ProjectRepository::class);
-        $this->app->bind(IFolder::class,FolderRepository::class);
-        $this->app->bind(IContract::class,ContractRepository::class);
-        $this->app->bind(IProtocol::class,ProtocolRepository::class);
+        $this->app->bind(ICompanyRepository::class,CompanyRepository::class);
+        $this->app->bind(IProjectRepository::class,ProjectRepository::class);
+        $this->app->bind(IFolderRepository::class,FolderRepository::class);
+        $this->app->bind(IContractRepository::class,ContractRepository::class);
+        $this->app->bind(IProtocolRepository::class,ProtocolRepository::class);
     }
 
     /**

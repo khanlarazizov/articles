@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Lib\Repositories;
 
-use App\Interfaces\IProtocol;
+use App\Lib\Repositories\Interfaces\IProtocolRepository;
 use App\Models\Protocol;
 use Illuminate\Support\Facades\Storage;
 
-class ProtocolRepository implements IProtocol
+class ProtocolRepository implements IProtocolRepository
 {
 
     public function getAllProtols()

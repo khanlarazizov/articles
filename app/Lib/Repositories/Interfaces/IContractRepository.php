@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Lib\Repositories\Interfaces;
 
-interface  IContract
+interface  IContractRepository
 {
     public function getAllContracts();
 

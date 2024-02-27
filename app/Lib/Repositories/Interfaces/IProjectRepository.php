@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Lib\Repositories\Interfaces;
 
-interface IProject
+interface IProjectRepository
 {
     public function getAllProject($companyId);
 

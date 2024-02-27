@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Projects\StoreProjectRequest;
 use App\Http\Requests\Projects\UpdateProjectRequest;
-use App\Interfaces\ICompany;
-use App\Interfaces\IProject;
+use App\Lib\Exceptions\ModelNotFoundException;
+use App\Lib\Repositories\Interfaces\ICompanyRepository;
+use App\Lib\Repositories\Interfaces\IProjectRepository;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -13,7 +15,7 @@ class ProjectController extends Controller
     public $project;
     public $company;
 
-    public function __construct(IProject $project, ICompany $company)
+    public function __construct(IProjectRepository $project, ICompanyRepository $company)
     {
         $this->project = $project;
         $this->company = $company;
@@ -21,8 +23,14 @@ class ProjectController extends Controller
 
     public function index($companyId)
     {
-        $company = $this->company->getCompanyById($companyId);
-        $projects = $this->project->getAllProject($companyId)->paginate(5);
+
+        try {
+            $company = $this->company->getCompanyById($companyId);
+            $projects = $this->project->getAllProject($companyId)->paginate(5);
+        }catch (ModelNotFoundException $e){
+            Log::error($e->getMessage());
+            return view("error.404", ['message' => $e->getMessage()]);
+        }
 
         return view('folders.project.index', compact('projects', 'company'));
     }

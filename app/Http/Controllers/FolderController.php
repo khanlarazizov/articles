@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Folders\StoreFolderRequest;
 use App\Http\Requests\Folders\UpdateFolderRequest;
-use App\Interfaces\ICompany;
-use App\Interfaces\IFolder;
-use App\Interfaces\IProject;
+use App\Lib\Repositories\Interfaces\ICompanyRepository;
+use App\Lib\Repositories\Interfaces\IFolderRepository;
+use App\Lib\Repositories\Interfaces\IProjectRepository;
 
 class FolderController extends Controller
 {
@@ -14,7 +14,7 @@ class FolderController extends Controller
     public $project;
     public $company;
 
-    public function __construct(IFolder $folder, IProject $project, ICompany $company)
+    public function __construct(IFolderRepository $folder, IProjectRepository $project, ICompanyRepository $company)
     {
         $this->folder = $folder;
         $this->project = $project;

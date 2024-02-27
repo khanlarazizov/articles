@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Lib\Repositories\Interfaces;
 
 
-interface ICompany
+interface ICompanyRepository
 {
     public function getAllCompanies();
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces;
+namespace App\Lib\Repositories\Interfaces;
 
-interface IProtocol
+interface IProtocolRepository
 {
     public function getAllProtols();
 
