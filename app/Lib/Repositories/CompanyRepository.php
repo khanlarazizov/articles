@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Lib\Repositories;
 
-use App\Interfaces\ICompany;
+use App\Lib\Repositories\Interfaces\ICompanyRepository;
 use App\Models\Company;
 
-class CompanyRepository implements ICompany
+class CompanyRepository implements ICompanyRepository
 {
     public function getAllCompanies()
     {

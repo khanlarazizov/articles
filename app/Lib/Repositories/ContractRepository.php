@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Lib\Repositories;
 
-use App\Interfaces\IContract;
+use App\Lib\Exceptions\ModelNotFoundException;
+use App\Lib\Repositories\Interfaces\IContractRepository;
 use App\Models\Contract;
 use Illuminate\Support\Facades\Storage;
 
-class ContractRepository implements IContract
+class ContractRepository implements IContractRepository
 {
 
     public function getAllContracts()
@@ -21,7 +22,10 @@ class ContractRepository implements IContract
 
     public function getContractById($id)
     {
-        return Contract::find($id);
+        $contract = Contract::find($id);
+        if($contract == null)
+            throw new ModelNotFoundException("Not Found");
+        return $contract;
     }
 
     public function createContract(array $data)
@@ -44,11 +48,3 @@ class ContractRepository implements IContract
     }
 
 }
-
-
-
-
-
-
-
-?>
