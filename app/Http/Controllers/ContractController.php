@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Contracts\StoreContractRequest;
 use App\Http\Requests\Contracts\UpdateContractRequest;
-use App\Interfaces\IContract;
-use App\Interfaces\IFolder;
-use App\Models\Contract;
+use App\Lib\Exceptions\ModelNotFoundException;
+use App\Lib\Repositories\Interfaces\IContractRepository;
+use App\Lib\Repositories\Interfaces\IFolderRepository;
 use App\Traits\FileUploadTrait;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ContractController extends Controller
 {
@@ -17,7 +17,7 @@ class ContractController extends Controller
     public $folder;
     public $contract;
 
-    public function __construct(IFolder $folder, IContract $contract)
+    public function __construct(IFolderRepository $folder, IContractRepository $contract)
     {
         $this->folder = $folder;
         $this->contract = $contract;
@@ -40,20 +40,23 @@ class ContractController extends Controller
 
     public function store(StoreContractRequest $request)
     {
-        $other_type = $request->other_side_type_check == 'Fiziki şəxs' ? 'Fiziki şəxs' : $request->other_side_type;
+        dd($request->validated());
 
-        $insert = $request->validated();
-        $insert['other_side_type'] = $other_type;
-        $insert['file'] = $this->storeFile($request, 'file', 'contracts');
 
-        $this->contract->createContract($insert);
-
-        $notification = array(
-            'message' => $request->name . " adlı müqavilə siyahıya uğurla əlavə edildi",
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('contracts.index')->with($notification);
+//        $other_type = $request->other_side_type_check == 'Fiziki şəxs' ? 'Fiziki şəxs' : $request->other_side_type;
+//
+//        $insert = $request->validated();
+//        $insert['other_side_type'] = $other_type;
+//        $insert['file'] = $this->storeFile($request, 'file', 'contracts');
+//
+//        $this->contract->createContract($insert);
+//
+//        $notification = array(
+//            'message' => $request->name . " adlı müqavilə siyahıya uğurla əlavə edildi",
+//            'alert-type' => 'success'
+//        );
+//
+//        return redirect()->route('contracts.index')->with($notification);
     }
 
     public function show($id)
@@ -65,8 +68,14 @@ class ContractController extends Controller
 
     public function edit($id)
     {
-        $folders = $this->folder->folderAllTemporary();
-        $contract = $this->contract->getContractById($id);
+        try {
+            $folders = $this->folder->folderAllTemporary();
+            $contract = $this->contract->getContractById($id);
+        }
+        catch(ModelNotFoundException $e) {
+            Log::error($e->getMessage());
+            return view("error.404", ['message' => $e->getMessage()]);
+        }
         return view('documents.contract.edit', compact('contract', 'folders'));
     }
 

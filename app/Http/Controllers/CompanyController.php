@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Companies\StoreCompanyRequest;
 use App\Http\Requests\Companies\UpdateCompanyRequest;
-use App\Interfaces\ICompany;
+use App\Lib\Repositories\Interfaces\ICompanyRepository;
 
 class CompanyController extends Controller
 {
     public $company;
 
-    public function __construct(ICompany $company)
+    public function __construct(ICompanyRepository $company)
     {
         $this->company = $company;
     }
