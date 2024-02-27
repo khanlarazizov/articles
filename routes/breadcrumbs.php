@@ -58,6 +58,31 @@ Breadcrumbs::for('protocol-edit', function (BreadcrumbTrail $trail, Protocol $pr
     $trail->push($protocol->name, route('contracts.edit', $protocol->id));
 });
 
+// Home - ContractAddition
+Breadcrumbs::for('contract-addition', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Müqaviləyə Əlavə', route('documents.index'));
+});
+
+//// Home - ContractAddition - Edit
+//Breadcrumbs::for('protocol-edit', function (BreadcrumbTrail $trail, Protocol $protocol) {
+//    $trail->parent('contract');
+//    $trail->push($protocol->name, route('contracts.edit', $protocol->id));
+//});
+
+
+// Home - DeliveryStatement
+Breadcrumbs::for('delivery-statement', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Təhvil-təslim aktı', route('documents.index'));
+});
+
+//// Home - DeliveryStatement - Edit
+//Breadcrumbs::for('delivery-statement-edit', function (BreadcrumbTrail $trail, Protocol $protocol) {
+//    $trail->parent('contract');
+//    $trail->push($protocol->name, route('contracts.edit', $protocol->id));
+//});
+
 // Home - User
 Breadcrumbs::for('user', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
