@@ -43,10 +43,10 @@
 
     <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
-{{--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">--}}
+    {{--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">--}}
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed" >
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -75,44 +75,53 @@
                     <li class="nav-item">
                         <a href="{{route('home')}}"
                            class="nav-link {{Route::is('home') ? 'active' : '' }}">
-                            <p>Ana səhifə</p>
+                            <p>Əsas səhifə</p>
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="{{route('companies.index')}}"
-                           class="nav-link {{Route::is('companies.index') ? 'active' : '' }}">
-                            <p>Şirkət</p>
+                        <a href="{{route('documents.index')}}"
+                           class="nav-link {{Route::is('documents.index') ? 'active' : '' }}">
+                            <p>Sənədlər</p>
                         </a>
                     </li>
+
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('companies.index')}}"--}}
+{{--                           class="nav-link {{Route::is('companies.index') ? 'active' : '' }}">--}}
+{{--                            <p>Şirkət</p>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+
                     <li class="nav-item">
                         <a href="{{route('users.index')}}"
                            class="nav-link {{Route::is('users.index') ? 'active' : '' }}">
                             <p>İstifadəçilər</p>
                         </a>
                     </li>
-                    <li class="nav-item menu-is-opening menu-open">
-                        <a href="#" class="nav-link">
-                            <i class="fa-solid fa-file-contract" style="color: #ffffff;"></i>
-                            <p>
-                                Sənədlər
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{route('contracts.index')}}"
-                                   class="nav-link {{Route::is('contracts.index') || Route::is('contracts.create') || Route::is('contracts.edit') ? 'active' : '' }}">
-                                    <p>Müqavilə</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('protocols.index')}}"
-                                   class="nav-link {{Route::is('protocols.index') || Route::is('protocols.create')  || Route::is('protocols.edit') ? 'active' : '' }}">
-                                    <p>Protokol</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+{{--                    <li class="nav-item menu-is-opening menu-open">--}}
+{{--                        <a href="#" class="nav-link">--}}
+{{--                            <i class="fa-solid fa-file-contract" style="color: #ffffff;"></i>--}}
+{{--                            <p>--}}
+
+{{--                                <i class="right fas fa-angle-left"></i>--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('contracts.index')}}"--}}
+{{--                                   class="nav-link {{Route::is('contracts.index') || Route::is('contracts.create') || Route::is('contracts.edit') ? 'active' : '' }}">--}}
+{{--                                    <p>Müqavilə</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{route('protocols.index')}}"--}}
+{{--                                   class="nav-link {{Route::is('protocols.index') || Route::is('protocols.create')  || Route::is('protocols.edit') ? 'active' : '' }}">--}}
+{{--                                    <p>Protokol</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -128,18 +137,18 @@
 
         <!-- Main content -->
         <section class="content">
-            @yield('content')
+        @yield('content')
 
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
+    </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
 
 <!-- Toastr -->
@@ -151,8 +160,8 @@
 <script src="{{asset('dist/js/adminlte.js?v=3.2.0')}}"></script>
 <script>
     @if(Session::has('message'))
-    var type="{{Session::get('alert-type'),'info'}}"
-    switch (type){
+    var type = "{{Session::get('alert-type'),'info'}}"
+    switch (type) {
         case 'info':
             toastr.info("{{Session::get('message')}}");
             break;
