@@ -46,127 +46,154 @@
 
     $(document).on('click', '.close_form', function () {
         window.location.href = 'protocol.index'
+    });
+
+    $(document).on('change', '#contract_id', function (event) {
+        event.preventDefault();
+        var contractID = this.value;
+        $('#addition_id').html('');
+        // alert(contractID);
+
+
+        $.ajax({
+            url: "{{ route('get.addition') }}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                contract_id: contractID,
+                _token: "{{csrf_token()}}"
+            },
+            success: function (response) {
+                $('#addition_id').html('<option value="">Əlavə seç</option>');
+                console.log(response.additions)
+                $.each(response.additions, function (index, value) {
+                    $('#addition_id').append('<option value="' + value.id + '">' + value.number + '</option>');
+                });
+            }
+
+        });
     })
 
-    $('#addProtocolForm').validate({
-        ignore: [],
-        rules:{
-            name: {
-                required:true
-            },
-            date: {
-                required:true
-            },
-            other_side_name: {
-                required:true
-            },
-            price: {
-                required:true
-            },
-            tag: {
-                required:true
-            },
-            currency: {
-                required:true
-            },
-            file: {
-                required:true,
-                accept: "pdf"
-            }
-        },
-        messages: {
-            name: {
-                required: 'Ad daxil edin'
-            },
-            date: {
-                required: 'Tarix daxil edin'
-            },
-            other_side_name: {
-                required: 'Təmsilçini daxil edin'
-            },
-            price: {
-                required: 'Dəyər daxil edin'
-            },
-            tag: {
-                required: 'Etiket daxil edin'
-            },
-            file: {
-                required: 'Fayl daxil edin',
-                accept: 'Fayl pdf olmalıdır'
-            }
-        },
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-        }
-    });
 
-    $('#editProtocolForm').validate({
-        ignore: [],
-        rules:{
-            name: {
-                required:true
-            },
-            date: {
-                required:true
-            },
-            other_side_name: {
-                required:true
-            },
-            price: {
-                required:true
-            },
-            tag: {
-                required:true
-            },
-            currency: {
-                required:true
-            },
-            file: {
-                accept: "pdf"
-            }
-        },
-        messages: {
-            name: {
-                required: 'Ad daxil edin'
-            },
-            date: {
-                required: 'Tarix daxil edin'
-            },
-            other_side_name: {
-                required: 'Təmsilçini daxil edin'
-            },
-            price: {
-                required: 'Dəyər daxil edin'
-            },
-            tag: {
-                required: 'Etiket daxil edin'
-            },
-            file: {
-                accept: "Fayl pdf olmalıdır"
-            }
-        },
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-        }
-    });
+    // $('#addProtocolForm').validate({
+    //     ignore: [],
+    //     rules:{
+    //         name: {
+    //             required:true
+    //         },
+    //         date: {
+    //             required:true
+    //         },
+    //         other_side_name: {
+    //             required:true
+    //         },
+    //         price: {
+    //             required:true
+    //         },
+    //         tag: {
+    //             required:true
+    //         },
+    //         currency: {
+    //             required:true
+    //         },
+    //         file: {
+    //             required:true,
+    //             accept: "pdf"
+    //         }
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Ad daxil edin'
+    //         },
+    //         date: {
+    //             required: 'Tarix daxil edin'
+    //         },
+    //         other_side_name: {
+    //             required: 'Təmsilçini daxil edin'
+    //         },
+    //         price: {
+    //             required: 'Dəyər daxil edin'
+    //         },
+    //         tag: {
+    //             required: 'Etiket daxil edin'
+    //         },
+    //         file: {
+    //             required: 'Fayl daxil edin',
+    //             accept: 'Fayl pdf olmalıdır'
+    //         }
+    //     },
+    //     errorElement: 'span',
+    //     errorPlacement: function (error, element) {
+    //         error.addClass('invalid-feedback');
+    //         element.closest('.form-group').append(error);
+    //     },
+    //     highlight: function (element, errorClass, validClass) {
+    //         $(element).addClass('is-invalid');
+    //     },
+    //     unhighlight: function (element, errorClass, validClass) {
+    //         $(element).removeClass('is-invalid');
+    //     }
+    // });
+    //
+    // $('#editProtocolForm').validate({
+    //     ignore: [],
+    //     rules:{
+    //         name: {
+    //             required:true
+    //         },
+    //         date: {
+    //             required:true
+    //         },
+    //         other_side_name: {
+    //             required:true
+    //         },
+    //         price: {
+    //             required:true
+    //         },
+    //         tag: {
+    //             required:true
+    //         },
+    //         currency: {
+    //             required:true
+    //         },
+    //         file: {
+    //             accept: "pdf"
+    //         }
+    //     },
+    //     messages: {
+    //         name: {
+    //             required: 'Ad daxil edin'
+    //         },
+    //         date: {
+    //             required: 'Tarix daxil edin'
+    //         },
+    //         other_side_name: {
+    //             required: 'Təmsilçini daxil edin'
+    //         },
+    //         price: {
+    //             required: 'Dəyər daxil edin'
+    //         },
+    //         tag: {
+    //             required: 'Etiket daxil edin'
+    //         },
+    //         file: {
+    //             accept: "Fayl pdf olmalıdır"
+    //         }
+    //     },
+    //     errorElement: 'span',
+    //     errorPlacement: function (error, element) {
+    //         error.addClass('invalid-feedback');
+    //         element.closest('.form-group').append(error);
+    //     },
+    //     highlight: function (element, errorClass, validClass) {
+    //         $(element).addClass('is-invalid');
+    //     },
+    //     unhighlight: function (element, errorClass, validClass) {
+    //         $(element).removeClass('is-invalid');
+    //     }
+    // });
 
-    $(document).on('click','.btnClearFilter', function (event) {
+    $(document).on('click', '.btnClearFilter', function (event) {
         event.preventDefault();
         $("#protocolFilter").val('').trigger('reset');
     });
@@ -207,7 +234,7 @@
                 $.ajax({
                     url: 'protocols' + '/' + id,
                     method: 'delete',
-                    async:false,
+                    async: false,
                     success: function (response) {
                         console.log(response);
                         $("#row-" + id).remove();

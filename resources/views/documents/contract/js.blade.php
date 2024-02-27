@@ -32,9 +32,9 @@
     $(document).ready(function () {
         // $('.table').DataTable();
 
-        $('input[name="tag"]').amsifySuggestags({
-            tagLimit: 10
-        });
+        // $('input[name="tag"]').amsifySuggestags({
+        //     tagLimit: 10
+        // });
 
         $('#datepicker').datepicker({
             format: 'yy-mm-dd',
@@ -49,159 +49,159 @@
             }
         });
 
-        $('#addContractForm').validate({
-            ignore: [],
-            rules: {
-                name: {
-                    required: true
-                },
-                date: {
-                    required: true
-                },
-                other_side_name: {
-                    required: true
-                },
-                type: {
-                    required: true
-                },
-                price: {
-                    required: true
-                },
-                tag: {
-                    required: true
-                },
-                shopping: {
-                    required: true
-                },
-                other_side_type:{
-                    required: true
-                },
-                currency: {
-                    required: true
-                },
-                file: {
-                    required: true,
-                    accept: "pdf"
-                }
-            },
-            messages: {
-                name: {
-                    required: 'Ad daxil edin'
-                },
-                date: {
-                    required: 'Tarix daxil edin'
-                },
-                other_side_name: {
-                    required: 'Təmsilçini daxil edin'
-                },
-                type: {
-                    required: 'Tip daxil edin'
-                },
-                shopping: {
-                    required: 'Alırıq/Satırıq daxil edin'
-                },
-                other_side_type: {
-                    required: 'İmzalayan tərəfi daxil edin'
-                },
-                price: {
-                    required: 'Dəyər daxil edin'
-                },
-                tag: {
-                    required: 'Etiket daxil edin'
-                },
-                file: {
-                    required: 'Fayl daxil edin',
-                    accept: 'Fayl pdf olmalıdır'
-                }
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            },
-        });
-
-        $('#editContractForm').validate({
-            ignore: [],
-            rules: {
-                name: {
-                    required: true
-                },
-                date: {
-                    required: true
-                },
-                other_side_name: {
-                    required: true
-                },
-                type: {
-                    required: true
-                },
-                price: {
-                    required: true
-                },
-                tag: {
-                    required: true
-                },
-                shopping: {
-                    required: true
-                },
-                other_side_type: {
-                    required: true
-                },
-                currency: {
-                    required: true
-                },
-                file: {
-                    accept: "pdf"
-                }
-            },
-            messages: {
-                name: {
-                    required: 'Ad daxil edin'
-                },
-                date: {
-                    required: 'Tarix daxil edin'
-                },
-                other_side_name: {
-                    required: 'Təmsilçini daxil edin'
-                },
-                type: {
-                    required: 'Tip daxil edin'
-                },
-                shopping: {
-                    required: 'Alırıq/Satırıq daxil edin'
-                },
-                other_side_type: {
-                    required: 'İmzalayan tərəfi daxil edin'
-                },
-                price: {
-                    required: 'Dəyər daxil edin'
-                },
-                tag: {
-                    required: 'Etiket daxil edin'
-                },
-                file: {
-                    accept: "Fayl pdf olmalıdır"
-                }
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
+        // $('#addContractForm').validate({
+        //     ignore: [],
+        //     rules: {
+        //         name: {
+        //             required: true
+        //         },
+        //         date: {
+        //             required: true
+        //         },
+        //         other_side_name: {
+        //             required: true
+        //         },
+        //         type: {
+        //             required: true
+        //         },
+        //         price: {
+        //             required: true
+        //         },
+        //         tag: {
+        //             required: true
+        //         },
+        //         shopping: {
+        //             required: true
+        //         },
+        //         other_side_type:{
+        //             required: true
+        //         },
+        //         currency: {
+        //             required: true
+        //         },
+        //         file: {
+        //             required: true,
+        //             accept: "pdf"
+        //         }
+        //     },
+        //     messages: {
+        //         name: {
+        //             required: 'Ad daxil edin'
+        //         },
+        //         date: {
+        //             required: 'Tarix daxil edin'
+        //         },
+        //         other_side_name: {
+        //             required: 'Təmsilçini daxil edin'
+        //         },
+        //         type: {
+        //             required: 'Tip daxil edin'
+        //         },
+        //         shopping: {
+        //             required: 'Alırıq/Satırıq daxil edin'
+        //         },
+        //         other_side_type: {
+        //             required: 'İmzalayan tərəfi daxil edin'
+        //         },
+        //         price: {
+        //             required: 'Dəyər daxil edin'
+        //         },
+        //         tag: {
+        //             required: 'Etiket daxil edin'
+        //         },
+        //         file: {
+        //             required: 'Fayl daxil edin',
+        //             accept: 'Fayl pdf olmalıdır'
+        //         }
+        //     },
+        //     errorElement: 'span',
+        //     errorPlacement: function (error, element) {
+        //         error.addClass('invalid-feedback');
+        //         element.closest('.form-group').append(error);
+        //     },
+        //     highlight: function (element, errorClass, validClass) {
+        //         $(element).addClass('is-invalid');
+        //     },
+        //     unhighlight: function (element, errorClass, validClass) {
+        //         $(element).removeClass('is-invalid');
+        //     },
+        // });
+        //
+        // $('#editContractForm').validate({
+        //     ignore: [],
+        //     rules: {
+        //         name: {
+        //             required: true
+        //         },
+        //         date: {
+        //             required: true
+        //         },
+        //         other_side_name: {
+        //             required: true
+        //         },
+        //         type: {
+        //             required: true
+        //         },
+        //         price: {
+        //             required: true
+        //         },
+        //         tag: {
+        //             required: true
+        //         },
+        //         shopping: {
+        //             required: true
+        //         },
+        //         other_side_type: {
+        //             required: true
+        //         },
+        //         currency: {
+        //             required: true
+        //         },
+        //         file: {
+        //             accept: "pdf"
+        //         }
+        //     },
+        //     messages: {
+        //         name: {
+        //             required: 'Ad daxil edin'
+        //         },
+        //         date: {
+        //             required: 'Tarix daxil edin'
+        //         },
+        //         other_side_name: {
+        //             required: 'Təmsilçini daxil edin'
+        //         },
+        //         type: {
+        //             required: 'Tip daxil edin'
+        //         },
+        //         shopping: {
+        //             required: 'Alırıq/Satırıq daxil edin'
+        //         },
+        //         other_side_type: {
+        //             required: 'İmzalayan tərəfi daxil edin'
+        //         },
+        //         price: {
+        //             required: 'Dəyər daxil edin'
+        //         },
+        //         tag: {
+        //             required: 'Etiket daxil edin'
+        //         },
+        //         file: {
+        //             accept: "Fayl pdf olmalıdır"
+        //         }
+        //     },
+        //     errorElement: 'span',
+        //     errorPlacement: function (error, element) {
+        //         error.addClass('invalid-feedback');
+        //         element.closest('.form-group').append(error);
+        //     },
+        //     highlight: function (element, errorClass, validClass) {
+        //         $(element).addClass('is-invalid');
+        //     },
+        //     unhighlight: function (element, errorClass, validClass) {
+        //         $(element).removeClass('is-invalid');
+        //     }
+        // });
 
         $(document).on('click', '.btnShowContract', function (event) {
             event.preventDefault();

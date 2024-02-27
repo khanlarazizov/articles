@@ -1,12 +1,6 @@
 @extends('admin')
 @section('title','Qovluqlar')
 @section('content-header')
-    @php
-        $url = request()->getPathInfo();
-        $items = explode('/',$url);
-//        dd($items[2]);
-//        dd($items[4]);
-    @endphp
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -38,7 +32,7 @@
                     <tr>
                         <th scope="col">№</th>
                         <th scope="col" class="col-8">Ad</th>
-                        <th scope="col" class="col-3 text-center">ne yazim</th>
+                        <th scope="col" class="col-3"></th>
                     </tr>
                     </thead>
                     <tbody>

@@ -45,7 +45,6 @@
             error: function (error) {
                 $('#nameError').html(error.responseJSON.errors.name);
             }
-
         });
     });
 
@@ -122,6 +121,4 @@
             }
         })
     });
-
-
 </script>

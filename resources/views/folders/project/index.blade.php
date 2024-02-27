@@ -37,7 +37,7 @@
                     <tr>
                         <th scope="col">№</th>
                         <th scope="col" class="col-8">Ad</th>
-                        <th scope="col" class="col-3 text-center">ne yazim</th>
+                        <th scope="col" class="col-3"></th>
                     </tr>
                     </thead>
                     <tbody>
